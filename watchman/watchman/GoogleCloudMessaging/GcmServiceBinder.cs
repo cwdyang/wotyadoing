@@ -2,11 +2,33 @@
 
 namespace watchman
 {
-	public class GcmService
+
+	/// <summary>
+	/// Gcm service binder.
+	/// </summary>
+	public class GcmServiceBinder
 	{
-		public GcmService ()
+		GcmService service;
+
+		public GcmServiceBinder (GcmService service)
 		{
+			this.service = service;
+		}
+
+		public GcmService GetGcmService ()
+		{
+			return service;
 		}
 	}
+
+	public class GcmMessage
+	{
+		public string From;
+		public string To;
+		public string MessageText;
+	}
+
+	public delegate void GcmMessageReceivedHandler(object sender,GcmMessage message);
+
 }
 

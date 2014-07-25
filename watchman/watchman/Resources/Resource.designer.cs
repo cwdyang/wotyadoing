@@ -26,6 +26,8 @@ namespace watchman
 		
 		public static void UpdateIdValues()
 		{
+			global::FacebookMonoDroid.Resource.String.library_name = global::watchman.Resource.String.library_name;
+			global::Gcm.Client.Resource.String.library_name = global::watchman.Resource.String.library_name;
 		}
 		
 		public partial class Attribute
@@ -95,29 +97,32 @@ namespace watchman
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f040002
+			public const int app_name = 2130968578;
+			
 			// aapt resource value: 0x7f040001
-			public const int app_name = 2130968577;
+			public const int hello = 2130968577;
 			
 			// aapt resource value: 0x7f040000
-			public const int hello = 2130968576;
-			
-			// aapt resource value: 0x7f040004
-			public const int status_alarm = 2130968580;
-			
-			// aapt resource value: 0x7f040003
-			public const int status_disconnected = 2130968579;
-			
-			// aapt resource value: 0x7f040002
-			public const int status_ok = 2130968578;
-			
-			// aapt resource value: 0x7f040007
-			public const int status_ok_cancel = 2130968583;
-			
-			// aapt resource value: 0x7f040006
-			public const int status_panic = 2130968582;
+			public const int library_name = 2130968576;
 			
 			// aapt resource value: 0x7f040005
-			public const int status_warning = 2130968581;
+			public const int status_alarm = 2130968581;
+			
+			// aapt resource value: 0x7f040004
+			public const int status_disconnected = 2130968580;
+			
+			// aapt resource value: 0x7f040003
+			public const int status_ok = 2130968579;
+			
+			// aapt resource value: 0x7f040008
+			public const int status_ok_cancel = 2130968584;
+			
+			// aapt resource value: 0x7f040007
+			public const int status_panic = 2130968583;
+			
+			// aapt resource value: 0x7f040006
+			public const int status_warning = 2130968582;
 			
 			static String()
 			{
