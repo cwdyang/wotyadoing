@@ -1,5 +1,6 @@
 ﻿using System;
 using Android.Content;
+using Android.OS;
 
 namespace watchman
 {
@@ -16,9 +17,9 @@ namespace watchman
 			this.Activity = activity;
 		}
 
-		public void OnServiceConnected (ComponentName name, Android.OS.IBinder service)
+		public void OnServiceConnected (ComponentName name, IBinder service)
 		{
-			var binder = (GcmServiceBinder)service;
+			var binder = service as GcmServiceBinder;
 
 			if (binder != null) {
 				Activity.GCMBinder = binder;

@@ -2,6 +2,7 @@
 using Android.App;
 using Gcm.Client;
 using Android.Content;
+using Android.OS;
 
 namespace watchman
 {
@@ -16,13 +17,14 @@ namespace watchman
 	/// https://manage.windowsazure.com/@pcresourceshotmail.onmicrosoft.com#Workspaces/MobileServicesExtension/apps/cwdyangMobile/push
 	/// </summary>
 	[Service]
-	[IntentFilter(new String[]{"com.xamarin.GcmService"})]
+	[IntentFilter(new String[]{"com.xamarin.GcmServiceWatchman"})]
 	public class GcmService:GcmServiceBase
 	{
 		public GcmService ():base(GcmBroadcastReceiver.SENDER_IDS) { }
 		public string RegistrationId;
 
 		public event GcmMessageReceivedHandler GcmMessageReceived;
+		public event GcmRegisteredHandler GcmRegistered;
 
 		/// <summary>
 		/// you got friggin mail!
@@ -46,6 +48,12 @@ namespace watchman
 			}
 
 
+		}
+
+		public override IBinder OnBind (Intent intent)
+		{
+			var binder = new GcmServiceBinder (this);
+			return binder;
 		}
 
 		/// <summary>
@@ -92,7 +100,12 @@ namespace watchman
 		/// <param name="registrationId">Registration identifier.</param>
 		protected override void OnRegistered (Context context, string registrationId)
 		{
-			Console.WriteLine ("Device Id:" + registrationId);
+			RegistrationId = registrationId;
+			if (GcmRegistered != null) {
+				GcmRegistered (this, new GcmRegistration {
+					RegistrationId = registrationId
+				});
+			}
 		}
 	}
 }

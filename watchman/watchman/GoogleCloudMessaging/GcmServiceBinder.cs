@@ -1,4 +1,9 @@
 ﻿using System;
+using Android.App;
+using Android.OS;
+using Android.Content;
+using Gcm.Client;
+using Android.Widget;
 
 namespace watchman
 {
@@ -6,7 +11,7 @@ namespace watchman
 	/// <summary>
 	/// Gcm service binder.
 	/// </summary>
-	public class GcmServiceBinder
+	public class GcmServiceBinder: Binder
 	{
 		GcmService service;
 
@@ -28,7 +33,13 @@ namespace watchman
 		public string MessageText;
 	}
 
+	public class GcmRegistration
+	{
+		public string RegistrationId;
+	}
+
 	public delegate void GcmMessageReceivedHandler(object sender,GcmMessage message);
+	public delegate void GcmRegisteredHandler(object sender,GcmRegistration message);
 
 }
 

@@ -1,11 +1,11 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">Hello World, Click Me!</string>
+	<string name="hello">watchman</string>
 	<string name="app_name">watchman</string>
-	<string name="status_ok">watchman</string>
-	<string name="status_disconnected">watchman</string>
-	<string name="status_alarm">watchman</string>
-	<string name="status_warning">watchman</string>
-	<string name="status_panic">watchman</string>
-	<string name="status_ok_cancel">watchman</string>
+	<string name="status_ok">OK</string>
+	<string name="status_disconnected">Disconnected</string>
+	<string name="status_alarm">ALARM</string>
+	<string name="status_warning">WARNING</string>
+	<string name="status_panic">PANIC</string>
+	<string name="status_ok_cancel">CANCELLED</string>
 </resources>

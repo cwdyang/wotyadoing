@@ -20,7 +20,7 @@ using Android.Telephony.Gsm;
 
 namespace watchman
 {
-	[Activity (Label = "sentricare", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "watchman", MainLauncher = true, Icon = "@drawable/icon")]
 	[assembly:Permission (Name = Android.Manifest.Permission.Internet)]
 	[assembly:Permission (Name = Android.Manifest.Permission.WriteExternalStorage)]
 	//TODO 
@@ -71,24 +71,31 @@ namespace watchman
 			//The SENDER_ID is your Google API Console App Project Number
 			//https://console.developers.google.com/project/571871212429
 
-			if (!GcmClient.IsRegistered (this.ApplicationContext)) {
+			if (!GcmClient.IsRegistered (this.ApplicationContext) || true) {
 				GcmClient.Register (this.ApplicationContext, GcmBroadcastReceiver.SENDER_IDS);
 				GcmClient.SetRegisteredOnServer (this.ApplicationContext, true);
 			}
 
 			var connection = new GcmServiceConnection (this);
 			connection.ServiceConnected += onGcmConnected;
-			BindService (new Intent ("com.xamarin.GcmService"), connection, Bind.AutoCreate);
+			BindService (new Intent ("com.xamarin.GcmServiceWatchman"), connection, Bind.AutoCreate);
 
+		}
+
+		void onGcmRegistered (object sender, GcmRegistration message)
+		{
+			RunOnUiThread(()=>_button.Text = message.RegistrationId);
 		}
 
 		private void onGcmConnected (object sender, EventArgs e)
 		{
 			_gcmService = this.GCMBinder.GetGcmService ();
-			_gcmService.GcmMessageReceived += GcmMessageReceived;
+
+			_gcmService.GcmRegistered += onGcmRegistered;
+			_gcmService.GcmMessageReceived += onGcmMessageReceived;
 		}
 
-		private void GcmMessageReceived (object sender, GcmMessage message)
+		private void onGcmMessageReceived (object sender, GcmMessage message)
 		{
 			//TODO
 			RunOnUiThread(()=>_button.Text = message.MessageText);
@@ -304,12 +311,19 @@ namespace watchman
 		/// </summary>
 		private void setup()
 		{
+			SetupUI ();
 			SetupVibrator ();
 			SetupLocationManager ();
-
+			SetupBt ();
+			SetupAzure ();
+			SetupGcm ();
 		}
 
-
+		private void SetButtonState()
+		{
+			_button.SetText (Resource.String.status_alarm);
+			_button.SetBackgroundResource (Resource.Drawable.Icon);
+		}
 	}
 }
 
