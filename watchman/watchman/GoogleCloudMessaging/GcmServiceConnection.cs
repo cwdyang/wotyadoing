@@ -21,13 +21,15 @@ namespace watchman
 			var binder = (GcmServiceBinder)service;
 
 			if (binder != null) {
-
+				Activity.GCMBinder = binder;
+				Activity.IsGcmBound = true;
+				ServiceConnected (this, null);
 			}
 		}
 
 		public void OnServiceDisconnected (ComponentName name)
 		{
-			throw new NotImplementedException ();
+			Activity.IsGcmBound = false;
 		}
 	}
 }

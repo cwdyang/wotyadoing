@@ -22,7 +22,7 @@ namespace watchman
 		public GcmService ():base(GcmBroadcastReceiver.SENDER_IDS) { }
 		public string RegistrationId;
 
-		private event GcmMessageReceivedHandler GcmMessageReceived;
+		public event GcmMessageReceivedHandler GcmMessageReceived;
 
 		/// <summary>
 		/// you got friggin mail!
@@ -49,7 +49,7 @@ namespace watchman
 		}
 
 		/// <summary>
-		/// Initializes a new instance of the <see cref="watchman.GcmService"/> class.
+		/// creates a notification!
 		/// </summary>
 		/// <param name="caption">Caption.</param>
 		/// <param name="description">Description.</param>
