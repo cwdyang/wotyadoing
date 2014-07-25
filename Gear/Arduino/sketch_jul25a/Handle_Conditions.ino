@@ -1,16 +1,16 @@
 void RaiseWarning() {
-  if (conditionAlert) return;
-  // Send Message()
-  conditionWarning = true;  
+  if (conditionCode == Alert) return;
+  conditionCode = Warning;
+  SendServerMessage();   
   StartAlertCountdown();
   digitalWrite(pinLEDOn, LOW);
   digitalWrite(pinLEDAlert, LOW);
   digitalWrite(pinLEDWarning, HIGH);
 }
  void RaiseAlert() {
-  if (conditionWarning) conditionWarning = false;
+  conditionCode = Alert;
   StopTimers();
-  // Send Message()  
+  SendServerMessage();
   digitalWrite(pinLEDWarning, LOW);
   digitalWrite(pinLEDOn, LOW);
   digitalWrite(pinLEDAlert, HIGH);
@@ -18,12 +18,12 @@ void RaiseWarning() {
 }
 void CancelWarning() {
   StopTimers();
-  // Send Message()  
+  SendServerMessage();   
   ResetState();
 }
  void CancelAlert() {
   StopTimers();
-  // Send Message()  
+  SendServerMessage();   
   ResetState();
 }
 

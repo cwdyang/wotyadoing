@@ -1,11 +1,15 @@
 void PanicButtonPressed() {
-    reasonPanic = true;
-    conditionAlert = true;
-  // Send Message()  
+    reasonCode = Panic;
+    conditionCode = Alert;
     RaiseAlert();
 }
 void CancelButtonPressed() {
-  // Send Message()  
-  if (conditionWarning) CancelWarning();
-  if (conditionAlert) CancelAlert();  
+  if (conditionCode == Warning) {
+    conditionCode = Canceled;
+    CancelWarning();
+  }
+  if (conditionCode == Alert) {
+    conditionCode = Canceled;
+    CancelAlert();
+  }  
 }
