@@ -18,6 +18,8 @@ using Android.Bluetooth;
 using Java.Util;
 using Android.Telephony.Gsm;
 using Facebook;
+using WindowsAzure.Messaging;
+
 
 namespace watchman
 {
@@ -44,12 +46,14 @@ namespace watchman
 
 		#region Azure stuff
 
-		public static MobileServiceClient _azureClient;
+		private static MobileServiceClient _azureClient;
 
 		//daves shiz
 		private void SetupAzure()
 		{
 			_azureClient = new MobileServiceClient( "https://cwdyangmobile.azure-mobile.net/", "LwceRhiGkbclAKUwJgJckVXtPkYczn96" );
+
+
 		}
 
 		#endregion Azure stuff
@@ -59,6 +63,7 @@ namespace watchman
 		public GcmServiceBinder GCMBinder;
 		public bool IsGcmBound;
 		private GcmService _gcmService;
+		private string _gcmRegistrationId;
 
 		/// <summary>
 		/// Setups the gcm.
@@ -85,7 +90,14 @@ namespace watchman
 
 		void onGcmRegistered (object sender, GcmRegistration message)
 		{
-			RunOnUiThread(()=>_button.Text = message.RegistrationId);
+
+			RunOnUiThread(()=>{
+
+				//http://azure.microsoft.com/en-us/documentation/articles/partner-xamarin-notification-hubs-android-get-started/
+
+				_gcmRegistrationId = message.RegistrationId;
+				_button.Text = message.RegistrationId;
+			});
 		}
 
 		private void onGcmConnected (object sender, EventArgs e)
@@ -199,6 +211,13 @@ namespace watchman
 		}
 		#endregion BT stuff
 
+		#region AzureNotificationHub
+
+		//http://azure.microsoft.com/en-us/documentation/articles/notification-hubs-android-get-started/#register
+
+
+		#endregion 
+
 		#region FB stuff
 
 		private string _fbAccessToken;
@@ -234,9 +253,13 @@ namespace watchman
 			fb.AppId = "1443593652568359";
 			fb.AppSecret = "c186fdf4592956d6ae73715b1410de75";
 			fb.AccessToken = "CAAUg8NbcgScBAMtnbpl4LPNgUQFkTAJBMdmvu9ZChntZCk2s9qoJc5gCrxMzrhJvpSKuNuxKyfnZChu2aZCibkdqZBJgTtpxpmDMZCmYNbxjl6zGsAM1PXwMrMX5lYEAKaKTOm7PeSkj2zw3zBalnbXvD2SaCPTpPdHdOo0AlblRfaSNrUY1ZAWwXzIjtokmFXDt1foX3YwGe7ZB4PXWqrGe";//_fbAccessToken;
+			try
+			{
+				fb.Post ("me/feed", new { message = message });
+			}
+			catch {
 
-			fb.Post ("me/feed", new { message = message });
-
+			}
 			/*
 			fb.PostTaskAsync ("me/feed", new { message = myMessage }).ContinueWith (t => {
 				if (!t.IsFaulted) {

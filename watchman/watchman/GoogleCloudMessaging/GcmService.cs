@@ -3,6 +3,8 @@ using Android.App;
 using Gcm.Client;
 using Android.Content;
 using Android.OS;
+using WindowsAzure.Messaging;
+using System.Collections.Generic;
 
 namespace watchman
 {
@@ -25,6 +27,9 @@ namespace watchman
 
 		public event GcmMessageReceivedHandler GcmMessageReceived;
 		public event GcmRegisteredHandler GcmRegistered;
+
+		//https://manage.windowsazure.com/@pcresourceshotmail.onmicrosoft.com#Workspaces/ServiceBusExtension/namespace/daveyang_3f6de074-cb9d-48fe-9232-7693ae18334e/NotificationTopic/hubnannystate/dashboard
+		private static NotificationHub _azureNotHub;
 
 		/// <summary>
 		/// you got friggin mail!
@@ -102,6 +107,26 @@ namespace watchman
 		{
 			RegistrationId = registrationId;
 			if (GcmRegistered != null) {
+
+				_azureNotHub = new NotificationHub("hubnannystate","Endpoint=sb://daveyang.servicebus.windows.net/;SharedAccessKeyName=DefaultFullSharedAccessSignature;SharedAccessKey=Q9R9ld7gqouYfCHEK9LkumQXjFvvimNcavypWW1Wqvs=", this.ApplicationContext);
+
+				try
+				{
+					_azureNotHub.UnregisterAll(registrationId);
+				}
+				catch {
+				}
+
+				var tags = new List<string>() { "watchman" }; // create tags if you want
+
+				try
+				{
+					var hubRegistration = _azureNotHub.Register(registrationId);
+				}
+				catch(Exception ex){
+					var s = ex.ToString ();
+				}
+
 				GcmRegistered (this, new GcmRegistration {
 					RegistrationId = registrationId
 				});
