@@ -1,5 +1,4 @@
 byte SampleSensors() {
-  
   delay(1);
   if (SampleAccelerometer()) {
    reasonCode = Fall;
