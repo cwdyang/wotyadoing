@@ -2,4 +2,10 @@
 <resources>
 	<string name="hello">Hello World, Click Me!</string>
 	<string name="app_name">watchman</string>
+	<string name="status_ok">watchman</string>
+	<string name="status_disconnected">watchman</string>
+	<string name="status_alarm">watchman</string>
+	<string name="status_warning">watchman</string>
+	<string name="status_panic">watchman</string>
+	<string name="status_ok_cancel">watchman</string>
 </resources>

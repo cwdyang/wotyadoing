@@ -28,6 +28,16 @@ namespace watchman
 			button.Click += delegate {
 				button.Text = string.Format ("{0} clicks!", count++);
 			};
+
+			setup ();
+		}
+
+		/// <summary>
+		/// setup all the goodies
+		/// </summary>
+		private void setup()
+		{
+
 		}
 	}
 }
