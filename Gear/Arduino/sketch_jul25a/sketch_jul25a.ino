@@ -37,6 +37,7 @@ String messageReasonFall = "F";
 String messageReasonPanic = "P";
 String messageDebug = "#DEBUG: ";
 String messageDelimiter = "|";
+String messageTerminator = ";";
 // States
 typedef enum {Normal, Warning, Alert, Canceled} condition;
 volatile condition conditionCode;
