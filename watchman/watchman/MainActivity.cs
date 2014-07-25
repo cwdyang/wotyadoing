@@ -17,6 +17,7 @@ using Microsoft.WindowsAzure.MobileServices;
 using Android.Bluetooth;
 using Java.Util;
 using Android.Telephony.Gsm;
+using Facebook;
 
 namespace watchman
 {
@@ -199,6 +200,54 @@ namespace watchman
 		#endregion BT stuff
 
 		#region FB stuff
+
+		private string _fbAccessToken;
+		/// <summary>
+		/// this is da shit
+		/// http://facebooksdk.net/docs/faq/
+		/// </summary>
+		private void SetupFb()
+		{
+			var fb = new FacebookClient();
+			var result = fb.Get("oauth/access_token", new { 
+				client_id     = "1443593652568359",//"app_id", 
+				client_secret = "c186fdf4592956d6ae73715b1410de75",//"app_secret", 
+				grant_type    = "client_credentials" 
+			});
+
+			_fbAccessToken = Convert.ToString(result);
+
+			_fbAccessToken = _fbAccessToken.Replace (@"{""access_token"":""",string.Empty).Replace (@"""}",string.Empty);//  @"{""access_token"":""1443593652568359|glxYP4d6TA9FpE0MUTqbMm7uW_Q""}";
+
+			PostToFb ("grandma wana post to fb");
+		}
+
+		/// <summary>
+		/// fix the mother fucker here
+		/// https://developers.facebook.com/tools/explorer/145634995501895/
+		/// https://developers.facebook.com/tools/explorer/1443593652568359/?method=GET&path=me%3Ffields%3Did%2Cname&version=v2.0#_=_
+		/// </summary>
+		private void PostToFb(string message)
+		{
+			var fb = new FacebookClient("CAAUg8NbcgScBAMtnbpl4LPNgUQFkTAJBMdmvu9ZChntZCk2s9qoJc5gCrxMzrhJvpSKuNuxKyfnZChu2aZCibkdqZBJgTtpxpmDMZCmYNbxjl6zGsAM1PXwMrMX5lYEAKaKTOm7PeSkj2zw3zBalnbXvD2SaCPTpPdHdOo0AlblRfaSNrUY1ZAWwXzIjtokmFXDt1foX3YwGe7ZB4PXWqrGe");
+
+			fb.AppId = "1443593652568359";
+			fb.AppSecret = "c186fdf4592956d6ae73715b1410de75";
+			fb.AccessToken = "CAAUg8NbcgScBAMtnbpl4LPNgUQFkTAJBMdmvu9ZChntZCk2s9qoJc5gCrxMzrhJvpSKuNuxKyfnZChu2aZCibkdqZBJgTtpxpmDMZCmYNbxjl6zGsAM1PXwMrMX5lYEAKaKTOm7PeSkj2zw3zBalnbXvD2SaCPTpPdHdOo0AlblRfaSNrUY1ZAWwXzIjtokmFXDt1foX3YwGe7ZB4PXWqrGe";//_fbAccessToken;
+
+			fb.Post ("me/feed", new { message = message });
+
+			/*
+			fb.PostTaskAsync ("me/feed", new { message = myMessage }).ContinueWith (t => {
+				if (!t.IsFaulted) {
+					string message = "Great, your message has been posted to you wall!";
+					Console.WriteLine (message);
+				}
+			});
+			*/
+
+		}
+
 		#endregion FB stuff
 
 		#region Location stuff
@@ -317,6 +366,8 @@ namespace watchman
 			SetupBt ();
 			SetupAzure ();
 			SetupGcm ();
+			SetupFb ();
+
 		}
 
 		private void SetButtonState()
