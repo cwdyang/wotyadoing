@@ -101,6 +101,24 @@ namespace watchman
 			// aapt resource value: 0x7f040000
 			public const int hello = 2130968576;
 			
+			// aapt resource value: 0x7f040004
+			public const int status_alarm = 2130968580;
+			
+			// aapt resource value: 0x7f040003
+			public const int status_disconnected = 2130968579;
+			
+			// aapt resource value: 0x7f040002
+			public const int status_ok = 2130968578;
+			
+			// aapt resource value: 0x7f040007
+			public const int status_ok_cancel = 2130968583;
+			
+			// aapt resource value: 0x7f040006
+			public const int status_panic = 2130968582;
+			
+			// aapt resource value: 0x7f040005
+			public const int status_warning = 2130968581;
+			
 			static String()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
