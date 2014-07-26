@@ -81,7 +81,7 @@
     <Compile Include="GoogleCloudMessaging\GcmServiceConnection.cs" />
     <Compile Include="GoogleCloudMessaging\GcmServiceBroadcastReceiver.cs" />
     <Compile Include="Domain\GcmRegistrations.cs" />
-    <Compile Include="Domain\EventLog.cs" />
+    <Compile Include="Domain\event_log.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />
@@ -94,6 +94,10 @@
     <AndroidResource Include="Resources\drawable\Icon.png" />
     <AndroidResource Include="Resources\drawable\banner.jpg" />
     <AndroidResource Include="Resources\drawable\ok.jpg" />
+    <AndroidResource Include="Resources\drawable\alarm.jpg" />
+    <AndroidResource Include="Resources\drawable\discon.jpg" />
+    <AndroidResource Include="Resources\drawable\emer.jpg" />
+    <AndroidResource Include="Resources\drawable\warn.jpg" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Novell\Novell.MonoDroid.CSharp.targets" />
   <ItemGroup>

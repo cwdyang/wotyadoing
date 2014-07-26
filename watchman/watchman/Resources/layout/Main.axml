@@ -3,7 +3,16 @@
     android:orientation="vertical"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ff006666">
+    android:background="#1F728F">
+    <LinearLayout
+        android:orientation="vertical"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:background="#1F728F"
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:id="@+id/linearLayout1"
+        android:layout_marginBottom="0.0dp" />
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
@@ -17,7 +26,7 @@
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="36.9dp"
+        android:layout_height="50dp"
         android:id="@+id/linearLayout2"
         android:layout_marginBottom="0.0dp" />
     <Button
@@ -25,45 +34,46 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:text="@string/hello"
-        android:background="@drawable/ok"
-        android:textColor="#ffffff"
-        android:textSize="15dp"
+        android:background="@drawable/discon"
+        android:textColor="#1F728F"
+        android:textSize="25dp"
         android:textStyle="bold" />
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="32.6dp"
-        android:id="@+id/linearLayout2" />
-    <LinearLayout
-        android:orientation="horizontal"
-        android:minWidth="25px"
-        android:minHeight="25px"
-        android:layout_width="match_parent"
-        android:layout_height="46.8dp"
+        android:layout_height="101.3dp"
         android:id="@+id/linearLayout3">
         <Button
-            android:background="#ff006666"
+            android:background="#1F728F"
             android:id="@+id/btnStatus"
             android:text="@string/status"
             android:textColor="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="88.7dp"
+            android:layout_marginBottom="0.0dp"
+            android:paddingTop="10dp"
+            android:paddingRight="10dp"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp" />
     </LinearLayout>
     <LinearLayout
         android:orientation="horizontal"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="46.8dp"
+        android:layout_height="80dp"
         android:id="@+id/linearLayout3">
         <Button
-            android:background="#ffff1102"
+            android:background="@drawable/emer"
             android:id="@+id/btnDial"
+            android:textSize="25dp"
             android:text="@string/ring_111"
             android:textColor="#ffffff"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="83.6dp"
+            android:layout_marginBottom="0.0dp"
+            android:layout_marginTop="0.0dp" />
     </LinearLayout>
 </LinearLayout>

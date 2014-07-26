@@ -1,0 +1,107 @@
+﻿@model IEnumerable<SignalRChatApp.Models.event_log>
+@{
+    ViewBag.Title = "List";
+}
+@*Refresh page every 15 seconds*@
+@*<meta http-equiv="refresh" content="15" >*@
+
+<link type="text/css" rel="stylesheet" href="http://cdn.datatables.net/plug-ins/725b2a2115b/integration/jqueryui/dataTables.jqueryui.css" />
+
+@DateTime.Now
+
+@section scripts {
+    <script src="http://cdn.datatables.net/plug-ins/725b2a2115b/integration/jqueryui/dataTables.jqueryui.js"></script>
+    <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false"></script>
+
+    <script>
+        $(function () {
+            //$('#alertTable').dataTable({
+            //    "order": [[3, "desc"]],
+            //    //"aoColumnDefs": [
+            //    //    { 'bSortable': false, 'aTargets': [1] }
+            //    // ]
+            //});
+            //$('#alertTable').dataTable({
+            //    "bPaginate": false,
+            //    "bSort": true
+            //});
+
+            //$('#alertTable tr').click(function () {
+            //    window.open("/home/Details", null,
+            //        "height=200,width=400,status=yes,toolbar=no,menubar=no,location=no");
+            //});
+        });
+        var geocoder;
+        geocoder = new google.maps.Geocoder();
+        function codeLatLng(latlng) {
+            var latlngStr = latlng.split(',', 2);
+            var lat = parseFloat(latlngStr[0]);
+            var lng = parseFloat(latlngStr[1]);
+            var latlng = new google.maps.LatLng(lat, lng);
+            alert(latlng);
+            geocoder.geocode({ 'latLng': latlng }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    alert(results);
+                    //if (results[1]) {
+                    //    map.setZoom(11);
+                    //    marker = new google.maps.Marker({ position: latlng, map: map, icon: imageURL, title: title, content: title });
+
+                    //    /* Set onclick popup */
+                    //    var infowindow = new google.maps.InfoWindow({ content: title });
+                    //    google.maps.event.addListener(marker, 'click', function () { infowindow.open(marker.get('map'), marker); });
+
+                    //} else {
+                    //    alert('No results found');
+                    //}
+                } else {
+                    alert('Geocoder failed due to: ' + status);
+                }
+            });
+        }
+    </script>
+}
+
+<h2>Alert Monitoring</h2>
+<br />
+Welcome Elena M, these are teh alerts that require your attention
+
+<table id="alertTable" cellpadding="3" width="100%">
+    <thead>
+        <tr>
+           <th>Alert Type</th>
+            <th>Severity</th>
+            <th>Care Receiver</th>
+            <th>Location</th>
+            <th>Status</th>
+            <th>Operator</th>
+            <th>When?</th>
+            <td>View</td>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.event_type</td>
+                <td>@item.severity</td>
+                <td>@item.care_receiver</td>
+                <td>@item.altitude</td>
+                <td>@item.status</td>
+                <td>@item.operator_NAME</td>
+                <td>
+                    @item.C__createdAt.ToString("dd MMM yyyy hh:mm:ss")
+                </td>
+                <td>
+                    @Html.ActionLink("View", "Details", new { id = @item.id })
+                </td>
+                <td>
+                    @Html.ActionLink("Edit", "Details", new { id = @item.id, r = 1 })
+                </td>
+
+            </tr>
+    
+        }
+    </tbody>
+</table>
+
+
