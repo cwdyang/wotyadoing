@@ -1,6 +1,6 @@
 #include "Timer.h"
 #include "SoftwareSerial.h"
-byte TEST_BOARD = true;
+byte TEST_BOARD = false;
 // Acceleromter
 const byte pinAccelX = A0;
 const byte pinAccelY = A1;
@@ -64,9 +64,9 @@ void setup() {
     delay(2000);
   }
   SendCustomMessage(messageDelimiter + messageON + messageDelimiter +
-  messageOK + messageDelimiter + "SentriCare Client - Ver 0.1 BETA -> Hello World!");
+  messageOK + messageDelimiter + "SentriCare Client - Ver 0.2 BETA -> Hello World!");
   pinMode(pinAccelZG,INPUT);
-  pinMode(pinAccelSG,INPUT);
+  pinMode(pinAccelSG,OUTPUT);
   pinMode(pinTilt,INPUT);
   pinMode(pinGasDetect,INPUT);
   pinMode(pinPanic,INPUT);
