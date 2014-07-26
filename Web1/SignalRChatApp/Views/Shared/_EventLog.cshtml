@@ -1,0 +1,25 @@
+﻿@model IEnumerable<SignalRChatApp.Models.event_history>
+
+<h2>Alert History</h2> 
+<table width="100%">
+    <thead>
+        <tr>
+            <th>Status</th>
+            <th>Comments</th>
+            <th>Updated By</th>
+            <th>Updated</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@item.status</td>
+                <td>@item.comments</td>
+                <td></td>
+                <td>@*@item.C__updatedAt.ToString("dd MMM yyyy hh:mm:ss") *@</td>
+            </tr>
+        }
+
+    </tbody>
+</table>

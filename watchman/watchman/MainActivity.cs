@@ -44,6 +44,36 @@ namespace watchman
 			_btnStatus = FindViewById<Button> (Resource.Id.btnStatus);
 			_btnDial111 = FindViewById<Button> (Resource.Id.btnDial);
 
+			_btnState.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.discon));
+
+			_btnState.Click+= delegate {
+				//_btnState.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.alarm));
+
+				SetupBtTest();
+
+				//SetButtonState("","");
+				//SetButtonState("A","G");
+				//SetButtonState("A","F");
+				//SetButtonState("A","P");
+				//SetButtonState("W","G");
+				//SetButtonState("C","");
+				//SetButtonState("W","F");
+				//SetButtonState("W","P");
+				//SetButtonState("O","");
+				//SetButtonState("C","");
+
+			};
+
+			_btnDial111.Click += delegate {
+				_btnDial111.Text = string.Format ("Dialed 111...");
+
+				var uri = Android.Net.Uri.Parse ("tel:+64226512690");
+				var intent = new Intent (Intent.ActionCall, uri); 
+
+				StartActivity (intent);     
+			};
+
+
 			//_btnDial111.Click += onDial111Click;
 		}
 
@@ -76,7 +106,6 @@ namespace watchman
 		{
 
 			//Temp
-			insertEvenLog ("1234|A|F");
 			//http://www.dotnetthoughts.net/xamarin-android-push-notifications-using-google-cloud-messaging-gcm-and-asp-net/
 			GcmClient.CheckDevice (this);
 			GcmClient.CheckManifest (this);
@@ -134,7 +163,7 @@ namespace watchman
 
 		private static int  REQUEST_ENABLE_BLUETOOTH      = 0x1111;
 		private static int  REQUEST_DISCOVERABLE_BLUETOOTH  = 0x222;
-		private const string _btDeviceName = "HC-06";
+		private const string _btDeviceName = "SFX"; //PROD"HC-06"; //TEST"SFX";
 		private BluetoothSocket _btSocket;
 		private BluetoothServerSocket _btsSocket;
 		private BluetoothDevice _btDevice;
@@ -143,12 +172,42 @@ namespace watchman
 		private string _btMacAddress = "00001101-0000-1000-8000-00805f9b34fb";
 		private byte[] _btInputBuffer;
 
-		private void SetupBt()
+		private void SetupBtProd()
 		{
 			try
 			{
 				if (_btAdapter != null &&
 				   !_btAdapter.IsEnabled) {
+					Intent enabler = new Intent(BluetoothAdapter.ActionRequestEnable);
+					StartActivityForResult(enabler, REQUEST_ENABLE_BLUETOOTH);
+				}
+
+				if (_btAdapter.IsDiscovering)
+					_btAdapter.CancelDiscovery ();
+
+				_btAdapter.StartDiscovery();
+
+				_btDevices = _btAdapter.BondedDevices.Where(x=>(new string[]{_btDeviceName}.ToList().Contains(x.Name))).ToList();
+
+				if (_btDevices.Count == 0) {
+					//TODO log something
+					return;
+				}
+
+				_btSocket = _btDevices.First ().CreateRfcommSocketToServiceRecord(UUID.FromString(_btMacAddress));
+
+			}
+			catch(Exception ex) {
+			}
+		}
+
+
+		private void SetupBtTest()
+		{
+			try
+			{
+				if (_btAdapter != null &&
+					!_btAdapter.IsEnabled) {
 					Intent enabler = new Intent(BluetoothAdapter.ActionRequestEnable);
 					StartActivityForResult(enabler, REQUEST_ENABLE_BLUETOOTH);
 				}
@@ -184,22 +243,33 @@ namespace watchman
 		/// Inserts the even log.
 		/// </summary>
 		/// <param name="rawData">Raw data.</param>
-		private async void insertEvenLog(string rawData)
+		private async Task insertEvenLog(string rawData)
 		{
 			//1234|O|K|SentriCare Client - Ver 0.1 BETA -> Hello World!;1234|A|F;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|C|P;1234|A|G;1234|C|G;
 			string[] rawCode = rawData.Split ('|').ToArray ();
 			if(rawCode.Length == 3)//make sure it's in this format 1234|A|F
 			{
-				EventLog eventLog = new EventLog {
+				var address = GetGeoAddresses ().First ();
+
+				event_log eventLog = new event_log {
 					device_id = rawCode [0], //123
 					event_type = rawCode [1],//A
-					event_data = rawCode [2],//F
-					created_at = DateTime.Now,
-					longitute = _location.Longitude.ToString(),
+					event_reason = rawCode [2],//F
+					longitude = _location.Longitude.ToString(),
 					latitude = _location.Latitude.ToString(),
-					altitude = _location.Altitude.ToString(),
+					altitude = address.SubThoroughfare + " " + address.Thoroughfare + ", " + address.Locality,
+					care_receiver = "",
+					comments = "",
+					operator_NAME = "",
+					severity = "",
+					status = ""
 				};
-				await _azureClient.GetTable<EventLog> ().InsertAsync (eventLog);
+
+				await UnlockPhone ();
+
+				await SetButtonState(rawCode [1],rawCode [2]);
+
+				await _azureClient.GetTable<event_log> ().InsertAsync (eventLog);
 			}
 			else
 			{
@@ -218,6 +288,8 @@ namespace watchman
 			{
 				_btSocket.Connect();
 
+				SetButtonState("O","");
+
 				_btInputBuffer = new byte[2048];
 
 				int read;
@@ -235,11 +307,11 @@ namespace watchman
 						foreach (string rawCode in values.Split(";".ToCharArray())) {
 
 							//6421505156
-							SmsManager.Default.SendTextMessage ("+64210366688", null,
-								"Mrs Agnes Brown is in trouble. @ " + GetGeoAddresses().First().ToString(),null, null);
+							//SmsManager.Default.SendTextMessage ("+64210366688", null,
+							//	"Mrs Agnes Brown is in trouble. @ " + GetGeoAddresses().First().ToString(),null, null);
 
 							//insert this event log
-							insertEvenLog(rawCode);
+							await insertEvenLog(rawCode);
 							//_location;
 							/*
 							 * 
@@ -296,7 +368,7 @@ namespace watchman
 
 			_fbAccessToken = _fbAccessToken.Replace (@"{""access_token"":""",string.Empty).Replace (@"""}",string.Empty);//  @"{""access_token"":""1443593652568359|glxYP4d6TA9FpE0MUTqbMm7uW_Q""}";
 
-			PostToFb ("grandma wana post to fb" + DateTime.Now.ToString());
+			//PostToFb ("grandma wana post to fb" + DateTime.Now.ToString());
 		}
 
 		/// <summary>
@@ -444,19 +516,92 @@ namespace watchman
 		/// </summary>
 		private void setup()
 		{
+			UnlockPhone ();
+
 			SetupUI ();
 			SetupVibrator ();
 			SetupLocationManager ();
-			SetupBt ();
+			SetupBtTest ();
 			SetupAzure ();
 			SetupGcm ();
 			SetupFb ();
+
+			//Task.Run(()=> insertEvenLog ("1234|A|F").Wait());
+
+			Task.Run(()=> ReadBtStream ());
+
+
+
 		}
 
-		private void SetButtonState()
+		private DateTime? _lastAlert = null;
+
+		private async Task UnlockPhone()
 		{
-			_btnState.SetText (Resource.String.status_alarm);
-			_btnState.SetBackgroundResource (Resource.Drawable.Icon);
+			/*
+			Window window = this.Window;
+			window.AddFlags(WindowManagerFlags.DismissKeyguard);
+			window.AddFlags(WindowManagerFlags.ShowWhenLocked);
+			window.AddFlags(WindowManagerFlags.TurnScreenOn);
+			*/
+
+			PowerManager pm = (PowerManager) this.GetSystemService(Context.PowerService);
+			PowerManager.WakeLock w1 = pm.NewWakeLock (
+				WakeLockFlags.Full|
+				WakeLockFlags.AcquireCausesWakeup|
+				WakeLockFlags.ScreenBright|
+				WakeLockFlags.OnAfterRelease, "NotificationReceiver");
+
+			w1.Acquire ();
+			//w1.Release ();
+		}
+
+		private async Task SetButtonState(string eventType,string reason)
+		{
+
+			var buttonDesc = "";
+
+			bool etA = Resources.GetString (Resource.String.event_type_alarm_code)==(eventType);
+			bool etO = Resources.GetString (Resource.String.event_type_ok_code)==(eventType);
+			bool etC = Resources.GetString (Resource.String.event_type_cancel_code)==(eventType);
+			bool etW = Resources.GetString (Resource.String.event_type_warn_code)==(eventType);
+
+			buttonDesc += (etA)?Resources.GetString (Resource.String.event_type_alarm_desc):string.Empty;
+			buttonDesc += (etW)?Resources.GetString (Resource.String.event_type_warning_desc):string.Empty;
+			buttonDesc += (etC)?Resources.GetString (Resource.String.event_type_cancel_desc):string.Empty;
+			buttonDesc += (etO)?Resources.GetString (Resource.String.event_type_ok_desc):string.Empty;
+
+
+
+			if(buttonDesc=="")
+				buttonDesc = "Disconnected";
+
+			bool rG = Resources.GetString (Resource.String.reason_gas_code)==(reason);
+			bool rF = Resources.GetString (Resource.String.reason_fall_code)==(reason);
+			bool rP = Resources.GetString (Resource.String.reason_panic_code)==(reason);
+
+			buttonDesc += (rG)?" " + Resources.GetString (Resource.String.reason_gas_desc):string.Empty;
+			buttonDesc += (rF)?" " + Resources.GetString (Resource.String.reason_fall_desc):string.Empty;
+			buttonDesc += (rP)?" " + Resources.GetString (Resource.String.reason_panic_desc):string.Empty;
+
+
+			RunOnUiThread (() => {
+				_btnState.SetBackgroundResource ((etA)? 
+					Resource.Drawable.alarm:
+					(etW)?
+					Resource.Drawable.warn:
+					(etO||etC)?Resource.Drawable.ok:Resource.Drawable.discon);
+
+				if (etA || etW) {
+					_lastAlert = DateTime.Now;
+					_btnStatus.Text = "Emergency personnel on their way to you, please stay where you are.";
+				} else if (etC || _lastAlert.HasValue) {
+					_btnStatus.Text = "Last alert: " + _lastAlert.Value.ToString ("ddd dd/mm/yyyy hh:mm tt");
+				}
+
+				_btnState.Text = buttonDesc;
+			}
+			);
 		}
 	}
 }

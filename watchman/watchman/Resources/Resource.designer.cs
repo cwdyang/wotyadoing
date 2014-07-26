@@ -47,16 +47,28 @@ namespace watchman
 		{
 			
 			// aapt resource value: 0x7f020000
-			public const int banner = 2130837504;
+			public const int alarm = 2130837504;
 			
 			// aapt resource value: 0x7f020001
-			public const int Icon = 2130837505;
+			public const int banner = 2130837505;
 			
 			// aapt resource value: 0x7f020002
-			public const int monoandroidsplash = 2130837506;
+			public const int discon = 2130837506;
 			
 			// aapt resource value: 0x7f020003
-			public const int ok = 2130837507;
+			public const int emer = 2130837507;
+			
+			// aapt resource value: 0x7f020004
+			public const int Icon = 2130837508;
+			
+			// aapt resource value: 0x7f020005
+			public const int monoandroidsplash = 2130837509;
+			
+			// aapt resource value: 0x7f020006
+			public const int ok = 2130837510;
+			
+			// aapt resource value: 0x7f020007
+			public const int warn = 2130837511;
 			
 			static Drawable()
 			{
@@ -121,11 +133,53 @@ namespace watchman
 			// aapt resource value: 0x7f040004
 			public const int app_name = 2130968580;
 			
+			// aapt resource value: 0x7f04000b
+			public const int event_type_alarm_code = 2130968587;
+			
+			// aapt resource value: 0x7f040012
+			public const int event_type_alarm_desc = 2130968594;
+			
+			// aapt resource value: 0x7f04000e
+			public const int event_type_cancel_code = 2130968590;
+			
+			// aapt resource value: 0x7f040015
+			public const int event_type_cancel_desc = 2130968597;
+			
+			// aapt resource value: 0x7f04000c
+			public const int event_type_ok_code = 2130968588;
+			
+			// aapt resource value: 0x7f040014
+			public const int event_type_ok_desc = 2130968596;
+			
+			// aapt resource value: 0x7f04000d
+			public const int event_type_warn_code = 2130968589;
+			
+			// aapt resource value: 0x7f040013
+			public const int event_type_warning_desc = 2130968595;
+			
 			// aapt resource value: 0x7f040001
 			public const int hello = 2130968577;
 			
 			// aapt resource value: 0x7f040000
 			public const int library_name = 2130968576;
+			
+			// aapt resource value: 0x7f040011
+			public const int reason_fall_code = 2130968593;
+			
+			// aapt resource value: 0x7f040018
+			public const int reason_fall_desc = 2130968600;
+			
+			// aapt resource value: 0x7f04000f
+			public const int reason_gas_code = 2130968591;
+			
+			// aapt resource value: 0x7f040016
+			public const int reason_gas_desc = 2130968598;
+			
+			// aapt resource value: 0x7f040010
+			public const int reason_panic_code = 2130968592;
+			
+			// aapt resource value: 0x7f040017
+			public const int reason_panic_desc = 2130968599;
 			
 			// aapt resource value: 0x7f040003
 			public const int ring_111 = 2130968579;

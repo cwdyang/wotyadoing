@@ -10,4 +10,23 @@
 	<string name="status_warning">WARNING</string>
 	<string name="status_panic">PANIC</string>
 	<string name="status_ok_cancel">CANCELLED</string>
+
+	<string name="event_type_alarm_code">A</string>
+	<string name="event_type_ok_code">O</string>
+	<string name="event_type_warn_code">W</string>
+	<string name="event_type_cancel_code">C</string>
+
+
+	<string name="reason_gas_code">G</string>
+	<string name="reason_panic_code">P</string>
+	<string name="reason_fall_code">F</string>
+
+	<string name="event_type_alarm_desc">Alarm! </string>
+	<string name="event_type_warning_desc">Warning! </string>
+	<string name="event_type_ok_desc">All OK! </string>
+	<string name="event_type_cancel_desc">OK, incident cancelled! </string>
+
+	<string name="reason_gas_desc">Gas incident.</string>
+	<string name="reason_panic_desc">Panic button pressed.</string>
+	<string name="reason_fall_desc">Fall detected.</string>
 </resources>

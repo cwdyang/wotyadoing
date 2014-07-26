@@ -1,0 +1,37 @@
+﻿@model SignalRChatApp.Models.contact
+@{
+    var tableName = "Contacts" + Model.RowIndex;    
+}
+
+<table id="@tableName" style="display:none;">
+
+
+<tr>
+                    <td>Full Name</td>
+                    <td>@Model.name</td>
+                </tr>
+                <tr>
+                    <td>Relationship</td>
+                    <td>@Model.relationship</td>
+                </tr>
+                <tr>
+                    <td>Preferred Contact</td>
+                    <td>@Model.primary_contact</td>
+                </tr>
+                <tr>
+                    <td>Address</td>
+                    <td>@Model.address</td>
+                </tr>
+                <tr>
+                    <td>Cellphone</td>
+                    <td>@Model.office_phone</td>
+                </tr>
+                <tr>
+                    <td>Homephone</td>
+                    <td>@Model.home_phone</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Model.email_id</td>
+                </tr>
+    </table>

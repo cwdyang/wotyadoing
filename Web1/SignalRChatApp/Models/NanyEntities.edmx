@@ -1,0 +1,209 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="NannyModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityContainer Name="NannyModelsStoreContainer">
+          <EntitySet Name="contact" EntityType="NannyModels.Store.contact" store:Type="Tables" Schema="cwdyangMobile" />
+          <EntitySet Name="event_history" EntityType="NannyModels.Store.event_history" store:Type="Tables" Schema="cwdyangMobile" />
+          <EntitySet Name="event_log" EntityType="NannyModels.Store.event_log" store:Type="Tables" Schema="cwdyangMobile" />
+        </EntityContainer>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="__createdAt" Type="datetimeoffset" Nullable="false" Precision="3" />
+          <Property Name="__updatedAt" Type="datetimeoffset" Precision="3" />
+          <Property Name="__version" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="care_receiver" Type="nvarchar(max)" />
+          <Property Name="name" Type="nvarchar(max)" />
+          <Property Name="address" Type="nvarchar(max)" />
+          <Property Name="home_phone" Type="nvarchar(max)" />
+          <Property Name="office_phone" Type="nvarchar(max)" />
+          <Property Name="relationship" Type="nvarchar(max)" />
+          <Property Name="primary_contact" Type="float" />
+          <Property Name="email_id" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="event_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="__createdAt" Type="datetimeoffset" Nullable="false" Precision="3" />
+          <Property Name="__updatedAt" Type="datetimeoffset" Precision="3" />
+          <Property Name="__version" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="severity" Type="nvarchar(max)" />
+          <Property Name="comments" Type="nvarchar(max)" />
+          <Property Name="date_time" Type="datetimeoffset" Precision="3" />
+          <Property Name="event_id" Type="nvarchar(max)" />
+          <Property Name="operator_name" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="event_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="nvarchar" Nullable="false" MaxLength="255" />
+          <Property Name="__createdAt" Type="datetimeoffset" Nullable="false" Precision="3" />
+          <Property Name="__updatedAt" Type="datetimeoffset" Precision="3" />
+          <Property Name="__version" Type="timestamp" Nullable="false" StoreGeneratedPattern="Computed" />
+          <Property Name="care_receiver" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="event_type" Type="nvarchar(max)" />
+          <Property Name="severity" Type="nvarchar(max)" />
+          <Property Name="operator_NAME" Type="nvarchar(max)" />
+          <Property Name="device_id" Type="nvarchar(max)" />
+          <Property Name="comments" Type="nvarchar(max)" />
+          <Property Name="latitude" Type="nvarchar(max)" />
+          <Property Name="longitude" Type="nvarchar(max)" />
+          <Property Name="altitude" Type="nvarchar(max)" />
+          <Property Name="event_reason" Type="nvarchar(max)" />
+        </EntityType>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="NannyModels" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="NannyStateEntities" p1:LazyLoadingEnabled="true">
+          <EntitySet Name="event_history" EntityType="NannyModels.event_history" />
+          <EntitySet Name="contacts" EntityType="NannyModels.contact" />
+          <EntitySet Name="event_log" EntityType="NannyModels.event_log" />
+        </EntityContainer>
+        <EntityType Name="event_history">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="String" Name="id" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTimeOffset" Name="C__createdAt" Nullable="false" Precision="3" />
+          <Property Type="DateTimeOffset" Name="C__updatedAt" Precision="3" />
+          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="status" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="severity" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="comments" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="DateTimeOffset" Name="date_time" Precision="3" />
+          <Property Type="String" Name="event_id" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="operator_name" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="contact">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="String" Name="id" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTimeOffset" Name="C__createdAt" Nullable="false" Precision="3" />
+          <Property Type="DateTimeOffset" Name="C__updatedAt" Precision="3" />
+          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="care_receiver" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="name" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="address" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="home_phone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="office_phone" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="relationship" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="Double" Name="primary_contact" />
+          <Property Type="String" Name="email_id" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="event_log">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Type="String" Name="id" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+          <Property Type="DateTimeOffset" Name="C__createdAt" Nullable="false" Precision="3" />
+          <Property Type="DateTimeOffset" Name="C__updatedAt" Precision="3" />
+          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="String" Name="care_receiver" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="status" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="event_type" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="severity" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="operator_NAME" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="device_id" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="comments" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="latitude" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="longitude" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="altitude" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Type="String" Name="event_reason" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="NannyModelsStoreContainer" CdmEntityContainer="NannyStateEntities">
+          <EntitySetMapping Name="event_history">
+            <EntityTypeMapping TypeName="NannyModels.event_history">
+              <MappingFragment StoreEntitySet="event_history">
+                <ScalarProperty Name="operator_name" ColumnName="operator_name" />
+                <ScalarProperty Name="event_id" ColumnName="event_id" />
+                <ScalarProperty Name="date_time" ColumnName="date_time" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="severity" ColumnName="severity" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="C__version" ColumnName="__version" />
+                <ScalarProperty Name="C__updatedAt" ColumnName="__updatedAt" />
+                <ScalarProperty Name="C__createdAt" ColumnName="__createdAt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="contacts">
+            <EntityTypeMapping TypeName="NannyModels.contact">
+              <MappingFragment StoreEntitySet="contact">
+                <ScalarProperty Name="email_id" ColumnName="email_id" />
+                <ScalarProperty Name="primary_contact" ColumnName="primary_contact" />
+                <ScalarProperty Name="relationship" ColumnName="relationship" />
+                <ScalarProperty Name="office_phone" ColumnName="office_phone" />
+                <ScalarProperty Name="home_phone" ColumnName="home_phone" />
+                <ScalarProperty Name="address" ColumnName="address" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="care_receiver" ColumnName="care_receiver" />
+                <ScalarProperty Name="C__version" ColumnName="__version" />
+                <ScalarProperty Name="C__updatedAt" ColumnName="__updatedAt" />
+                <ScalarProperty Name="C__createdAt" ColumnName="__createdAt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="event_log">
+            <EntityTypeMapping TypeName="NannyModels.event_log">
+              <MappingFragment StoreEntitySet="event_log">
+                <ScalarProperty Name="event_reason" ColumnName="event_reason" />
+                <ScalarProperty Name="altitude" ColumnName="altitude" />
+                <ScalarProperty Name="longitude" ColumnName="longitude" />
+                <ScalarProperty Name="latitude" ColumnName="latitude" />
+                <ScalarProperty Name="comments" ColumnName="comments" />
+                <ScalarProperty Name="device_id" ColumnName="device_id" />
+                <ScalarProperty Name="operator_NAME" ColumnName="operator_NAME" />
+                <ScalarProperty Name="severity" ColumnName="severity" />
+                <ScalarProperty Name="event_type" ColumnName="event_type" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="care_receiver" ColumnName="care_receiver" />
+                <ScalarProperty Name="C__version" ColumnName="__version" />
+                <ScalarProperty Name="C__updatedAt" ColumnName="__updatedAt" />
+                <ScalarProperty Name="C__createdAt" ColumnName="__createdAt" />
+                <ScalarProperty Name="id" ColumnName="id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

@@ -1,0 +1,226 @@
+﻿@model SignalRChatApp.Models.event_log
+@{
+    ViewBag.Title = "Details";
+    bool canEdit = Request.QueryString["r"] == "1";
+}
+
+@section scripts {
+    @*<script type="text/javascript"  src="http://maps.google.com/maps/api/js?sensor=false"></script> *@
+    <script src="https://maps.googleapis.com/maps/api/js?v=3.exp&sensor=true&libraries=places"></script>
+    <script>
+        $(function () {
+            $('#ddlContacts').change(function () {
+                var selectedDescription = $(this).find('option:selected').val();
+                $("table[id^='Contact']").hide();
+                $('#' + selectedDescription).show();
+            });
+
+            $('#Severity').change(function () {
+                //severityStatusChange($(this), '#SeverityCommentRow');
+                var oldData = $(this).data('oldData');
+
+                if ($.isPlainObject(oldData)) {
+                     if (oldData.val == $(this).val()) {
+                        $('#SeverityCommentRow').fadeOut("slow");
+                    }
+                    else {
+                        $('#SeverityCommentRow').fadeIn("slow");
+                    }
+                }
+                //else {
+                //    // set up oldData
+                //    var old = {};
+                //    old.val = $(this).val();
+                //    $(this).data('oldData', old);
+                //    // show comments
+                //    $('#SeverityCommentRow').fadeIn("slow");
+                //}
+            });
+
+            $('#Status').change(function () {
+                //severityStatusChange($(this), '#SeverityCommentRow');
+                var oldData = $(this).data('oldData');
+
+                if ($.isPlainObject(oldData)) {
+                    if (oldData.val == $(this).val()) {
+                        $('#StatusCommentRow').fadeOut("slow");
+                    }
+                    else {
+                        $('#StatusCommentRow').fadeIn("slow");
+                    }
+                }
+            });
+
+            // Fire the onchange event on startup
+            $("#ddlContacts").change();
+            codeAddress();
+            saveCurrentSelection();
+            
+        });
+
+        function severityStatusChange(elm, row) {
+            var oldData = $(elm).data('oldData');
+
+            if ($.isPlainObject(oldData)) {
+                if (oldData.val == $(this).val()) {
+                    $(row).fadeOut("slow");
+                }
+                else {
+                    $(row).fadeIn("slow");
+                }
+            }
+        }
+
+        function saveCurrentSelection() {
+            saveCurrentSelectionElement('#Severity');
+            saveCurrentSelectionElement('#Status');
+        }
+        function saveCurrentSelectionElement(selector) {
+            var old = {};
+            old.val = $(selector).val();
+            $(selector).data('oldData', old);
+        }
+
+        var geocoder;
+        var map;
+        function codeAddress() {
+            geocoder = new google.maps.Geocoder();
+            var lat = '';
+            var lng = ''
+            //var city_state_zip = document.getElementById("city_state_zip").innerHTML;
+            var street_address = document.getElementById("lblHomeAddress").innerHTML;
+            //var address = street_address + " " + city_state_zip;
+            var address = street_address;
+            //address = "177 Landscape Road, Mt Roskill, Auckland, New Zealand";
+            geocoder.geocode({ 'address': address }, function (results, status) {
+                if (status == google.maps.GeocoderStatus.OK) {
+                    lat = results[0].geometry.location.lat(); //getting the lat
+                    lng = results[0].geometry.location.lng(); //getting the lng
+                    map.setCenter(results[0].geometry.location);
+                    var marker = new google.maps.Marker({
+                        map: map,
+                        position: results[0].geometry.location
+                    });
+                } else {
+                    alert("Geocode was not successful for the following reason: " + status);
+                }
+            });
+            var latlng = new google.maps.LatLng(lat, lng);
+            var myOptions = {
+                zoom: 16,
+                center: latlng,
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            }
+            map = new google.maps.Map(document.getElementById("map_canvas"), myOptions);
+        }
+     </script>
+}
+
+<h2>Fall Alert Details</h2>
+<h3>Alert Summary</h3>
+<table>
+    <tr>
+        <td>
+            <table>
+                <tr>
+                    <td>Care Receiver</td>
+                    <td>@Model.care_receiver</td>
+                </tr>
+                <tr>
+                    <td>Alert Type</td>
+                    <td>@Model.event_type</td>
+                </tr>
+                <tr>
+                    <td>Incident Address</td>
+                    <td><label id="lblHomeAddress">@Model.altitude</label></td>
+                </tr>
+                <tr>
+                    <td>At home</td>
+                    <td>@Html.CheckBoxFor(m => m.AtHome, new { @checked = "checked" })</td>
+                </tr>
+                <tr>
+                    <td>Home Address</td>
+                    <td>@Model.CareReceiverContact.name </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table style="vertical-align:top;">
+                <tr>
+                    <td>Severity</td>
+                    <td>
+                        @if (canEdit)
+                        {
+                            @Html.DropDownListFor(m => m.severity, new SelectList(Model.Severities));
+                        }
+                        else
+                        {
+                            // Readonly view??
+                            @Model.severity;
+                        }
+
+                    </td>
+                </tr>
+                <tr id="SeverityCommentRow" style="display:none;">
+                    <td colspan="2">
+                        <textarea id="SeverityComment" rows="4" cols="25"></textarea>
+                        @*@Html.TextAreaFor(model => model.SeverityComment, new {@cols="80" , @rows="4" })*@
+                        <input type="button" value="Ok" />
+                    </td>
+                </tr>
+                <tr>
+                    <td>Status</td>
+                    <td>
+                        @if (canEdit)
+                        {
+                            @Html.DropDownListFor(m => m.status, new SelectList(Model.Statuses));
+                        }
+                        else
+                        {
+                            // Readonly view??
+                            @Model.status;
+                        }
+                    </td>
+                </tr>
+                <tr id="StatusCommentRow" style="display:none;">
+                    <td colspan="2">
+                        <textarea id="StatusComment" rows="4" cols="25"></textarea>
+                      @* @Html.TextAreaFor(model => model.StatusComment, new {@cols="80" , @rows="4" })*@
+                        <input type="button" value="Ok" />
+                    </td>
+                </tr>
+            </table>
+        </td>
+        <td>
+            <table>
+                <tr>
+                    <td>
+                        Contacts <br />
+                        @Html.DropDownListFor(m => m.PrimaryContact.name, new SelectList(Model.CareContacts, "id", "name"), new { id = "ddlContacts" })
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        @{
+                            var recordIndex = 1;
+                            foreach (SignalRChatApp.Models.contact item in Model.Contacts) {
+                                var m = (SignalRChatApp.Models.contact) item;
+                                m.RowIndex = recordIndex;
+                                @Html.Partial("_ContactDetail", (SignalRChatApp.Models.contact) item)
+                                recordIndex++;
+                            }
+                        }
+
+
+                    </td>
+
+                </tr>
+                
+            </table>
+        </td>
+    </tr>
+</table>
+<div id="map_canvas" style="height:600px;width: 600px;"></div>
+
+@Html.Partial("_EventLog", (IEnumerable<SignalRChatApp.Models.event_history>) @Model.History)
+

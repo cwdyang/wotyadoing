@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="04815ca21a2243dcaeb2bc8a6883b0a9" Name="Diagram1">
+        <EntityTypeShape EntityType="NannyModels.event_history" Width="1.5" PointX="8.625" PointY="21.125" />
+        <EntityTypeShape EntityType="NannyModels.contact" Width="1.5" PointX="1.8552285944368825" PointY="6.9356307866683373" />
+        <EntityTypeShape EntityType="NannyModels.event_log" Width="1.5" PointX="10.143507962181936" PointY="4.54893219682804" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>
