@@ -91,4 +91,24 @@ Our older community members can continue to be independent and safe.
 ##Slide 12 - End Sentricare
 
 
+**show:**
+* <strike>device and app</strike>
+* <strike>falling down</strike>
+* <strike>gas leak</strike>
+* <strike>panic button</strike>
+* alert received 
+* action taken
+* insights
+* Users v. Operators
+
+Sentricare answers many important questions: Who is having falls? Where are they located? What is the frequency of alerts and warnings?
+
+The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. 
+
+<mark>Data Visualisation</mark>
+
+<mark>Medical Records</mark>
+
+<mark>Whaty other data sets can I use to make more sense of the data?</mark>
+
 
