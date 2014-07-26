@@ -1,16 +1,15 @@
 byte SampleSensors() {
-  
   delay(1);
   if (SampleAccelerometer()) {
-   reasonFall = true;
+   reasonCode = Fall;
    return true;
   }
   if (SampleTiltSensor()) {
-   reasonFall = true;
+   reasonCode = Fall;
    return true;
   }  
   if (SampleGasSensor()) {
-  reasonGas = true;
+  reasonCode = Gas;
   return true;
   }  
   return false;

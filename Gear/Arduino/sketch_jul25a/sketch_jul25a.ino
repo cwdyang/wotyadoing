@@ -1,4 +1,5 @@
 #include "Timer.h"
+#include "SoftwareSerial.h"
 // Acceleromter
 const byte pinAccelX = A0;
 const byte pinAccelY = A1;
@@ -23,35 +24,39 @@ const byte pinBuzzer = 10;
 // BlueTooth
 const byte pinBlueToothTX = 9;
 const byte pinBlueToothRX = 8;
-// Misc
-Timer timerCountdown;
-Timer timerPulse;
-int idTimerCountdown;
-int idTimerPulse;
-int warningGracePeriod = 15000;
 // Messages
-String DEVICE_ID = "1234";
+String deviceID = "1234";
 String messageON = "O";
+String messageOK = "K";
+String messageNormal = "N";
 String messageWarning = "W";
 String messageAlert = "A";
 String messageCanceled = "C";
 String messageReasonGas = "G";
 String messageReasonFall = "F";
 String messageReasonPanic = "P";
+String messageDebug = "#DEBUG: ";
 String messageDelimiter = "|";
+String messageTerminator = ";";
 // States
-volatile byte conditionAlert;
-volatile byte conditionWarning;
-volatile byte reasonGas;
-volatile byte reasonFall;
-volatile byte reasonPanic;
-volatile byte stateButtonPanic;  // Use?
-volatile byte stateButtonCancel; // Use?
-
+typedef enum {Normal, Warning, Alert, Canceled} condition;
+volatile condition conditionCode;
+typedef enum {Gas, Fall, Panic} reason;
+volatile reason reasonCode;
+// Misc
+SoftwareSerial serialBT(pinBlueToothRX, pinBlueToothTX); // RX, TX
+Timer timerCountdown;
+Timer timerPulse;
+int idTimerCountdown;
+int idTimerPulse;
+int warningGracePeriod = 15000;
+int cycletimeBuzzer = 500;
+//------------------------------------------------------------------
 void setup() {
-  
   Serial.begin(9600);
-  
+  serialBT.begin(9600);
+  SendCustomMessage(messageDelimiter + messageON + messageDelimiter +
+  messageOK + messageDelimiter + "SentriCare Client - Ver 0.1 BETA -> Hello World!");
   pinMode(pinAccelZG,INPUT);
   pinMode(pinAccelSG,INPUT);
   pinMode(pinTilt,INPUT);
@@ -63,18 +68,15 @@ void setup() {
   pinMode(pinBuzzer,OUTPUT);
   pinMode(pinBlueToothTX,OUTPUT);
   pinMode(pinBlueToothRX,INPUT);
-  
   attachInterrupt(0, PanicButtonPressed, HIGH);
   attachInterrupt(1, CancelButtonPressed, HIGH);
   ResetState();
-} 
+}
+//------------------------------------------------------------------
 void loop() {
-
-  if (!conditionWarning && !conditionAlert) {
-//   if (!digitalRead(pinTilt)) RaiseWarning();
+  if (conditionCode == Normal) {
    if (SampleSensors()) {
-     if (reasonGas) {
-       conditionAlert = true;
+     if (reasonCode == Gas || reasonCode == Fall) {
        RaiseAlert();
      }
      else {
@@ -86,18 +88,9 @@ void loop() {
   timerPulse.update();  
 }
 void ResetState() {
-  conditionAlert = false;
-  conditionWarning = false;
-  reasonGas = false;
-  reasonFall = false;
-  reasonPanic = false;
-  stateButtonPanic = false;
-  stateButtonCancel = false;
+  conditionCode = Normal;
   digitalWrite(pinBuzzer, LOW);
   digitalWrite(pinLEDAlert, LOW);
   digitalWrite(pinLEDWarning, LOW);
   digitalWrite(pinLEDOn, HIGH);
 }
-
-
-
