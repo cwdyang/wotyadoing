@@ -2,18 +2,68 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent">
+    android:layout_height="fill_parent"
+    android:background="#ff006666">
     <LinearLayout
         android:orientation="vertical"
         android:minWidth="25px"
         android:minHeight="25px"
         android:layout_width="match_parent"
-        android:layout_height="125.0dp"
+        android:layout_height="100dp"
         android:background="@drawable/banner"
         android:id="@+id/linearLayout1" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="36.9dp"
+        android:id="@+id/linearLayout2"
+        android:layout_marginBottom="0.0dp" />
     <Button
-        android:id="@+id/myButton"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/hello" />
+        android:id="@+id/btnState"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:text="@string/hello"
+        android:background="@drawable/ok"
+        android:textColor="#ffffff"
+        android:textSize="15dp"
+        android:textStyle="bold" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="32.6dp"
+        android:id="@+id/linearLayout2" />
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="46.8dp"
+        android:id="@+id/linearLayout3">
+        <Button
+            android:background="#ff006666"
+            android:id="@+id/btnStatus"
+            android:text="@string/status"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+    <LinearLayout
+        android:orientation="horizontal"
+        android:minWidth="25px"
+        android:minHeight="25px"
+        android:layout_width="match_parent"
+        android:layout_height="46.8dp"
+        android:id="@+id/linearLayout3">
+        <Button
+            android:background="#ffff1102"
+            android:id="@+id/btnDial"
+            android:text="@string/ring_111"
+            android:textColor="#ffffff"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
 </LinearLayout>

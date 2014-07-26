@@ -1,23 +1,25 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.c0d5b698" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="watchman\GoogleCloudMessaging\GcmServiceConnection.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Android.MonoForAndroid_API_15" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="watchman\MainActivity.cs">
     <Files>
-      <File FileName="watchman\MainActivity.cs" Line="79" Column="1" />
-      <File FileName="watchman\Resources\values\Strings.xml" Line="3" Column="31" />
-      <File FileName="watchman\GoogleCloudMessaging\GcmService.cs" Line="103" Column="1" />
+      <File FileName="watchman\MainActivity.cs" Line="170" Column="3" />
+      <File FileName="watchman\Resources\values\Strings.xml" Line="5" Column="24" />
+      <File FileName="watchman\GoogleCloudMessaging\GcmService.cs" Line="125" Column="29" />
       <File FileName="watchman\GoogleCloudMessaging\GcmServiceBinder.cs" Line="14" Column="2" />
-      <File FileName="watchman\GoogleCloudMessaging\GcmServiceBroadcastReceiver.cs" Line="18" Column="3" />
-      <File FileName="watchman\GoogleCloudMessaging\GcmServiceConnection.cs" Line="18" Column="4" />
-      <File FileName="watchman\Properties\AndroidManifest.xml" Line="11" Column="1" />
-      <File FileName="watchman\Properties\AssemblyInfo.cs" Line="12" Column="33" />
-      <File FileName="watchman\Resources\Resource.designer.cs" Line="30" Column="70" />
+      <File FileName="watchman\GoogleCloudMessaging\GcmServiceBroadcastReceiver.cs" Line="9" Column="26" />
+      <File FileName="watchman\GoogleCloudMessaging\GcmServiceConnection.cs" Line="24" Column="1" />
+      <File FileName="watchman\Properties\AndroidManifest.xml" Line="11" Column="2" />
+      <File FileName="watchman\Properties\AssemblyInfo.cs" Line="1" Column="1" />
+      <File FileName="watchman\Resources\Resource.designer.cs" Line="1" Column="1" />
+      <File FileName="watchman\Domain\GcmRegistrations.cs" Line="5" Column="31" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State expanded="True">
-          <Node name="watchman" expanded="True" selected="True">
+          <Node name="watchman" expanded="True">
             <Node name="References" expanded="True" />
             <Node name="ComponentReferenceFolder" expanded="True" />
+            <Node name="Domain" expanded="True" />
             <Node name="GoogleCloudMessaging" expanded="True" />
             <Node name="Properties" expanded="True" />
             <Node name="Resources" expanded="True">
@@ -25,6 +27,7 @@
               <Node name="layout" expanded="True" />
               <Node name="values" expanded="True" />
             </Node>
+            <Node name="MainActivity.cs" selected="True" />
           </Node>
         </State>
       </Pad>
@@ -35,13 +38,16 @@
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore>
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\GoogleCloudMessaging\GcmServiceBroadcastReceiver.cs" line="13" column="69" />
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\GoogleCloudMessaging\GcmServiceConnection.cs" line="24" column="25" />
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="87" column="1" />
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="93" column="1" />
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\GoogleCloudMessaging\GcmService.cs" line="103" column="36" />
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="79" column="1" />
-      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="74" column="1" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\GoogleCloudMessaging\GcmServiceBroadcastReceiver.cs" line="15" column="69" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="96" column="1" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="88" column="1" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="83" column="1" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="277" column="1" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\GoogleCloudMessaging\GcmService.cs" line="125" column="29" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="331" column="1" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="253" column="8" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="274" column="28" />
+      <Breakpoint file="C:\Development\DATACOMP2014\watchman\watchman\MainActivity.cs" line="263" column="10" />
     </BreakpointStore>
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />

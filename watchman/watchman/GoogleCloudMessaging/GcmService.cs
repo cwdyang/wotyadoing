@@ -116,9 +116,7 @@ namespace watchman
 				}
 				catch {
 				}
-
-				var tags = new List<string>() { "watchman" }; // create tags if you want
-
+					
 				try
 				{
 					var hubRegistration = _azureNotHub.Register(registrationId);

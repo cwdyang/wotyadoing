@@ -55,6 +55,9 @@ namespace watchman
 			// aapt resource value: 0x7f020002
 			public const int monoandroidsplash = 2130837506;
 			
+			// aapt resource value: 0x7f020003
+			public const int ok = 2130837507;
+			
 			static Drawable()
 			{
 				global::Android.Runtime.ResourceIdManager.UpdateIdValues();
@@ -68,11 +71,23 @@ namespace watchman
 		public partial class Id
 		{
 			
+			// aapt resource value: 0x7f060005
+			public const int btnDial = 2131099653;
+			
+			// aapt resource value: 0x7f060002
+			public const int btnState = 2131099650;
+			
+			// aapt resource value: 0x7f060004
+			public const int btnStatus = 2131099652;
+			
 			// aapt resource value: 0x7f060000
 			public const int linearLayout1 = 2131099648;
 			
 			// aapt resource value: 0x7f060001
-			public const int myButton = 2131099649;
+			public const int linearLayout2 = 2131099649;
+			
+			// aapt resource value: 0x7f060003
+			public const int linearLayout3 = 2131099651;
 			
 			static Id()
 			{
@@ -103,8 +118,8 @@ namespace watchman
 		public partial class String
 		{
 			
-			// aapt resource value: 0x7f040002
-			public const int app_name = 2130968578;
+			// aapt resource value: 0x7f040004
+			public const int app_name = 2130968580;
 			
 			// aapt resource value: 0x7f040001
 			public const int hello = 2130968577;
@@ -112,23 +127,29 @@ namespace watchman
 			// aapt resource value: 0x7f040000
 			public const int library_name = 2130968576;
 			
-			// aapt resource value: 0x7f040005
-			public const int status_alarm = 2130968581;
-			
-			// aapt resource value: 0x7f040004
-			public const int status_disconnected = 2130968580;
-			
 			// aapt resource value: 0x7f040003
-			public const int status_ok = 2130968579;
+			public const int ring_111 = 2130968579;
 			
-			// aapt resource value: 0x7f040008
-			public const int status_ok_cancel = 2130968584;
+			// aapt resource value: 0x7f040002
+			public const int status = 2130968578;
 			
 			// aapt resource value: 0x7f040007
-			public const int status_panic = 2130968583;
+			public const int status_alarm = 2130968583;
 			
 			// aapt resource value: 0x7f040006
-			public const int status_warning = 2130968582;
+			public const int status_disconnected = 2130968582;
+			
+			// aapt resource value: 0x7f040005
+			public const int status_ok = 2130968581;
+			
+			// aapt resource value: 0x7f04000a
+			public const int status_ok_cancel = 2130968586;
+			
+			// aapt resource value: 0x7f040009
+			public const int status_panic = 2130968585;
+			
+			// aapt resource value: 0x7f040008
+			public const int status_warning = 2130968584;
 			
 			static String()
 			{

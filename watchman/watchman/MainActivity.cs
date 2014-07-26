@@ -16,14 +16,14 @@ using Gcm.Client;
 using Microsoft.WindowsAzure.MobileServices;
 using Android.Bluetooth;
 using Java.Util;
-using Android.Telephony.Gsm;
+using Android.Telephony;
 using Facebook;
 using WindowsAzure.Messaging;
 
 
 namespace watchman
 {
-	[Activity (Label = "watchman", MainLauncher = true, Icon = "@drawable/icon")]
+	[Activity (Label = "sentricare", MainLauncher = true, Icon = "@drawable/icon")]
 	[assembly:Permission (Name = Android.Manifest.Permission.Internet)]
 	[assembly:Permission (Name = Android.Manifest.Permission.WriteExternalStorage)]
 	//TODO 
@@ -34,11 +34,17 @@ namespace watchman
 
 		#region UI
 
-		private Button _button;
+		private Button _btnState;
+		private Button _btnStatus;
+		private Button _btnDial111;
 
 		private void SetupUI()
 		{
-			_button = FindViewById<Button> (Resource.Id.myButton);
+			_btnState = FindViewById<Button> (Resource.Id.btnState);
+			_btnStatus = FindViewById<Button> (Resource.Id.btnStatus);
+			_btnDial111 = FindViewById<Button> (Resource.Id.btnDial);
+
+			//_btnDial111.Click += onDial111Click;
 		}
 
 		#endregion UI
@@ -52,8 +58,6 @@ namespace watchman
 		private void SetupAzure()
 		{
 			_azureClient = new MobileServiceClient( "https://cwdyangmobile.azure-mobile.net/", "LwceRhiGkbclAKUwJgJckVXtPkYczn96" );
-
-
 		}
 
 		#endregion Azure stuff
@@ -91,12 +95,18 @@ namespace watchman
 		void onGcmRegistered (object sender, GcmRegistration message)
 		{
 
-			RunOnUiThread(()=>{
+			RunOnUiThread(async()=>{
 
 				//http://azure.microsoft.com/en-us/documentation/articles/partner-xamarin-notification-hubs-android-get-started/
+				try{
+					_gcmRegistrationId = message.RegistrationId;
+					_btnStatus.Text = "Registered with google cloud messaging + azure notification hub";
+					await _azureClient.GetTable<GcmRegistrations>().InsertAsync(new GcmRegistrations{registrationid=message.RegistrationId});
+				}
+				catch(Exception ex)
+				{
 
-				_gcmRegistrationId = message.RegistrationId;
-				_button.Text = message.RegistrationId;
+				}
 			});
 		}
 
@@ -111,7 +121,7 @@ namespace watchman
 		private void onGcmMessageReceived (object sender, GcmMessage message)
 		{
 			//TODO
-			RunOnUiThread(()=>_button.Text = message.MessageText);
+			RunOnUiThread(()=>_btnState.Text = message.MessageText);
 		}
 		#endregion GCM stuff
 
@@ -157,6 +167,8 @@ namespace watchman
 			}
 		}
 
+		//MAQSOOD
+		//1234|O|K|SentriCare Client - Ver 0.1 BETA -> Hello World!;1234|A|F;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|C|P;1234|A|G;1234|C|G;
 		private async void ReadBtStream()
 		{
 
@@ -184,9 +196,11 @@ namespace watchman
 
 							//6421505156
 							SmsManager.Default.SendTextMessage ("+64210366688", null,
-								"Your oldie is in trouble. spiked reading @ " + GetGeoAddresses().First().ToString(),null, null);
+								"Mrs Agnes Brown is in trouble. @ " + GetGeoAddresses().First().ToString(),null, null);
 
 							/*
+							 * 
+							 * example insert
 							Reading reading = new Reading {
 								sensor = s.Split ("|".ToArray ()) [0],
 								unit = s.Split ("|".ToArray ()) [1],
@@ -221,6 +235,7 @@ namespace watchman
 		#region FB stuff
 
 		private string _fbAccessToken;
+		private string _fbAPIAccessToken = "CAACEdEose0cBAHwUXwTtKZAzXjKvwoPTIDddICeeM9NIQy0bADMkQfZA9osZBfgsCzmncOYv1lpvc4zuhhSLqixMeGFa42VPFU8f3bQue7SH54XuIQIbE8woeQF3sxrR8JxDDKZCigawPy53qbShQ0i9ILkArdPIHsS84H4Ib2AQMWRhwa9yODjF2dtR0EyK1Tug6ZA0zelLTtONNPVre";
 		/// <summary>
 		/// this is da shit
 		/// http://facebooksdk.net/docs/faq/
@@ -238,7 +253,7 @@ namespace watchman
 
 			_fbAccessToken = _fbAccessToken.Replace (@"{""access_token"":""",string.Empty).Replace (@"""}",string.Empty);//  @"{""access_token"":""1443593652568359|glxYP4d6TA9FpE0MUTqbMm7uW_Q""}";
 
-			PostToFb ("grandma wana post to fb");
+			PostToFb ("grandma wana post to fb" + DateTime.Now.ToString());
 		}
 
 		/// <summary>
@@ -248,17 +263,18 @@ namespace watchman
 		/// </summary>
 		private void PostToFb(string message)
 		{
-			var fb = new FacebookClient("CAAUg8NbcgScBAMtnbpl4LPNgUQFkTAJBMdmvu9ZChntZCk2s9qoJc5gCrxMzrhJvpSKuNuxKyfnZChu2aZCibkdqZBJgTtpxpmDMZCmYNbxjl6zGsAM1PXwMrMX5lYEAKaKTOm7PeSkj2zw3zBalnbXvD2SaCPTpPdHdOo0AlblRfaSNrUY1ZAWwXzIjtokmFXDt1foX3YwGe7ZB4PXWqrGe");
+			var fb = new FacebookClient("CAACEdEose0cBAFFM3OyG9lISm35ZAnyxDGU5C3ppPIDBxX1lGTdfGIKKHiBovi7OKpCDOuouxFZCj60U3FoY92uObyH4maq3VlFdOImwa7EG8WgQjvkHnNlTSolf75U0Y30PAIrdjwn219STXvYUI2iMfnT2TEXLh78QXIni9y9avV9tTZBOwns1lPTm9lyRRFFQU97lZBPqxZAqAILtZB");
 
 			fb.AppId = "1443593652568359";
 			fb.AppSecret = "c186fdf4592956d6ae73715b1410de75";
-			fb.AccessToken = "CAAUg8NbcgScBAMtnbpl4LPNgUQFkTAJBMdmvu9ZChntZCk2s9qoJc5gCrxMzrhJvpSKuNuxKyfnZChu2aZCibkdqZBJgTtpxpmDMZCmYNbxjl6zGsAM1PXwMrMX5lYEAKaKTOm7PeSkj2zw3zBalnbXvD2SaCPTpPdHdOo0AlblRfaSNrUY1ZAWwXzIjtokmFXDt1foX3YwGe7ZB4PXWqrGe";//_fbAccessToken;
+			fb.AccessToken = _fbAPIAccessToken;//_fbAccessToken;
+
 			try
 			{
 				fb.Post ("me/feed", new { message = message });
 			}
-			catch {
-
+			catch (Exception ex) {
+				var s = ex.ToString ();
 			}
 			/*
 			fb.PostTaskAsync ("me/feed", new { message = myMessage }).ContinueWith (t => {
@@ -304,6 +320,8 @@ namespace watchman
 			
 				if(_locationProvider!=string.Empty)
 					_locationManager.RequestLocationUpdates(_locationProvider, 0, 0, this);
+
+				_location = _locationManager.GetLastKnownLocation(_locationProvider);
 			}
 			catch(Exception ex) {
 
@@ -369,10 +387,10 @@ namespace watchman
 
 			// Get our button from the layout resource,
 			// and attach an event to it
-			Button button = FindViewById<Button> (Resource.Id.myButton);
+			Button button = FindViewById<Button> (Resource.Id.btnState);
 			
 			button.Click += delegate {
-				button.Text = string.Format ("{0} clicks!", count++);
+				//button.Text = string.Format ("{0} clicks!", count++);
 			};
 
 			setup ();
@@ -390,13 +408,12 @@ namespace watchman
 			SetupAzure ();
 			SetupGcm ();
 			SetupFb ();
-
 		}
 
 		private void SetButtonState()
 		{
-			_button.SetText (Resource.String.status_alarm);
-			_button.SetBackgroundResource (Resource.Drawable.Icon);
+			_btnState.SetText (Resource.String.status_alarm);
+			_btnState.SetBackgroundResource (Resource.Drawable.Icon);
 		}
 	}
 }

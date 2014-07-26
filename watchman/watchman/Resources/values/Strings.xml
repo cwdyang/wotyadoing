@@ -1,7 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-	<string name="hello">watchman</string>
-	<string name="app_name">watchman</string>
+	<string name="hello">welcome to sentricare</string>
+	<string name="status">welcome to sentricare</string>
+	<string name="ring_111">Dial 111</string>
+	<string name="app_name">sentricare</string>
 	<string name="status_ok">OK</string>
 	<string name="status_disconnected">Disconnected</string>
 	<string name="status_alarm">ALARM</string>
