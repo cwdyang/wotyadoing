@@ -34,9 +34,9 @@ Ladies and Gentlemen, today I am pleased to announce the solution: <mark>[Slide 
 
 Sentricare's 24x7 service provides <mark>[Slide 4]</mark> peace of mind for seniors and their families. Unlike other fall detection systems that require expensive sensors installed in your house: <mark>[Slide 5]</mark> Sentricare goes where you go. The system notifies the response centre, but also <mark>[Slide 6]</mark> loved ones via SMS and Social Media connections. 
 
-<mark>[Slide 7]</mark> Incidents not only include fall detection, but other important safety features such as an emergency button and gas leak detection. <mark>[Slide 8]</mark> Rapid response means emergency services can be with you sooner. <mark>[Slide 9]</mark> Wherever you go, Sentricare is with you. 
+<mark>[Slide 7]</mark> Incidents not only include fall detection, but other important safety features such as an emergency button and gas leak detection. Rapid response means emergency services can be with you sooner. <mark>[Slide 8]</mark> Wherever you go, Sentricare is with you. 
 
-<mark>[Slide 10]</mark> The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. <mark>[Slide 11]</mark> Ultimately, Sentricare is about prevention. By identifying hazards in the home and public spaces through mapping and data analysis, risks can be mitigated. 
+<mark>[Slide 9]</mark> The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. <mark>[Slide 10]</mark> Ultimately, Sentricare is about prevention. By identifying hazards in the home and public spaces through mapping and data analysis, risks can be mitigated. 
 
 <mark>[Slide 11]</mark>Prevention is better and cheaper than the cure. Currently St John's Lifelink product is available for $45 per month with a setup cost of $350 and can only be used within 300m of the house. <mark>[Slide 12]</mark> Sentricare goes wherever you do: At $199 per device, and $44 per month; Sentricare is the more cost-effecitve solution.
 
