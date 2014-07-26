@@ -57,7 +57,8 @@ Oh! <mark>[Slide 14]</mark> One more thing... In the spirit of collaboration, I 
 
 **Narrator - Part 1: Device and App**
 
-Sentricare is there when you need it most. Here is the Sentricare belt, or as we refer to it: the halo of safety. This one small convenient device is worn by the older person. This device works in tandem with the Sentricare mobile app. Unlike other fall prevention devices, Sentricare's big advantage is that it is not bound to the home: it goes wherever you go, providing a safety net wherever and whenever you need it. 
+So let's take a look at the technology:
+Here is the sentricare device, it uses a proprietry fall-sensing algorithm to to detect falls using spacial awareness. In addition, Sentricare has an emergency panic button, to allow seniors to call for help without having to dial a call. Finally, Sentricare has a gas sensor to alert seniors of immenant danger. Here is the Mobile App: The Sentricare device pairs with your Mobile device via Bluetooth. Messages are sent from the device to the Sentricare service.
 
 *Demo - device and app*
 
@@ -66,7 +67,11 @@ Sentricare is there when you need it most. Here is the Sentricare belt, or as we
 
 **Narrator - Part 2: Falling Down**
 
-We can't be everywhere all the time which is why Sentricare is there when you need it most. A small fall can lead to big problems, and a quick effective response is necessary. A fifteen second warning is sounded allowing the user to cancel if it was a small stumble before triggering an alert. When a fall moves from warning to alert, family members are notified, and Sentricare operators receive a notification.
+A small fall can lead to big problems, and a quick effective response is necessary. 
+
+Oh No! Nanna is falling over! 
+
+A fifteen second warning is sounded allowing the user to cancel if it was a small stumble before triggering an alert. When a fall moves from warning to alert, family members are notified, and Sentricare operators receive a notification.
 
 *Demo - falling down*
 
@@ -77,17 +82,16 @@ We can't be everywhere all the time which is why Sentricare is there when you ne
 
 **Narrator - Part 3: Sentricare Screen**
 
-Sentricare Operators are able to monitor and see alerts from the cloud portal. The operator sees that Nanna is in trouble and can alert emergency services giving precise location information.
+Sentricare Operators are able to monitor and see alerts from the cloud portal. The operator sees that Nanna is in trouble and can alert emergency services giving precise location information. As you can see from the Map which is providing GPS coordinates.
 
 *Demo - Screens* 
 
 1. Operator - Main screen is open and active - alert is there.
 2. Click on the person's name - displays details and map. 
 3. Operator says "Alerting Emergency Services Now"
-4. *[optional]* Lego helicopter
 
 **Narrator - Part 4: Insight**
-As you can see, Sentricare allows us to keep track of the number of incidents a user has had. By using other services such as maps and other data, we can determine if a senior person needs to have a safety inspection on their house; or via mapping if there is a tripping hazard in a public space and alert council.
+So let's talk about Insight and Reporting: As you can see, Sentricare allows us to keep track of the number of incidents a user has had. By using other services such as maps and other data, we can determine if a senior person needs to have a safety inspection on their house; or via mapping if there is a tripping hazard in a public space and alert council.
 
 1. Operator show insight screen
 
@@ -102,7 +106,7 @@ It's important that when you have a problem, you have someone ready to support y
 
 **Narrator - Part 4: Gas Leak**
 
-It only takes one forgetful moment to create a dangerous situation. Sentricare's gas leak detector creates an alert immediately. As you can see, it can detect leaks and immediately alert the user and transmit a message to Sentricare operators.
+Oh No! Nanna Left the Gas on! Sentricare's gas leak detector creates an alert immediately. As you can see, it can detect leaks and immediately alert the user and transmit a message to Sentricare operators.
 
 *Demo - gas leak*
 
@@ -112,5 +116,4 @@ It only takes one forgetful moment to create a dangerous situation. Sentricare's
 **Demo Ends**
 
 **Narrator** Thank You: Now we have time for your questions.
-
 
