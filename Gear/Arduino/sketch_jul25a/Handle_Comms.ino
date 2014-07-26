@@ -6,8 +6,8 @@ void SendCustomMessage(String message) {
 }
 void SendServerMessage() {
   String message;
-  message = (deviceID + messageDelimiter + ConstructCondition(conditionCode)
-  + messageDelimiter + ConstructReason(reasonCode));   
+  message = deviceID + messageDelimiter + ConstructCondition(conditionCode)
+  + messageDelimiter + ConstructReason(reasonCode);   
   serialBT.print(message + messageTerminator);
   Serial.println(messageDebug + message);
 }
