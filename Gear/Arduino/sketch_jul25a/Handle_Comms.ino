@@ -1,9 +1,7 @@
-void WaitForBTSetial() {
-  // To Do
-}
+
 void SendCustomMessage(String message) {
   message = (deviceID + message);   
-  serialBT.println(message + messageTerminator);
+  serialBT.print(message + messageTerminator);
   if (Serial.available())Serial.println(messageDebug + message);
 }
 void SendServerMessage() {

@@ -1,5 +1,6 @@
 #include "Timer.h"
 #include "SoftwareSerial.h"
+byte TEST_BOARD = true;
 // Acceleromter
 const byte pinAccelX = A0;
 const byte pinAccelY = A1;
@@ -54,7 +55,14 @@ int cycletimeBuzzer = 500;
 //------------------------------------------------------------------
 void setup() {
   Serial.begin(9600);
-  serialBT.begin(9600);
+  if (TEST_BOARD) {
+    setupBlueToothConnection();
+  }
+  else
+  {
+    serialBT.begin(9600);
+    delay(2000);
+  }
   SendCustomMessage(messageDelimiter + messageON + messageDelimiter +
   messageOK + messageDelimiter + "SentriCare Client - Ver 0.1 BETA -> Hello World!");
   pinMode(pinAccelZG,INPUT);
@@ -76,7 +84,7 @@ void setup() {
 void loop() {
   if (conditionCode == Normal) {
    if (SampleSensors()) {
-     if (reasonCode == Gas || reasonCode == Fall) {
+     if (reasonCode == Gas) {
        RaiseAlert();
      }
      else {
@@ -93,4 +101,16 @@ void ResetState() {
   digitalWrite(pinLEDAlert, LOW);
   digitalWrite(pinLEDWarning, LOW);
   digitalWrite(pinLEDOn, HIGH);
+}
+void setupBlueToothConnection()
+{
+    serialBT.begin(38400);                           // Set BluetoothBee BaudRate to default baud rate 38400
+    serialBT.print("\r\n+STWMOD=0\r\n");             // set the bluetooth work in slave mode
+    serialBT.print("\r\n+STNA=SFX\r\n");    // set the bluetooth name as "SeeedBTSlave"
+    serialBT.print("\r\n+STOAUT=1\r\n");             // Permit Paired device to connect me
+    serialBT.print("\r\n+STAUTO=0\r\n");             // Auto-connection should be forbidden here
+    delay(2000);                                            // This delay is required.
+    serialBT.print("\r\n+INQ=1\r\n");                // make the slave bluetooth inquirable
+    delay(2000);                                            // This delay is required.
+    serialBT.flush();
 }

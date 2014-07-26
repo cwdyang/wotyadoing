@@ -8,6 +8,7 @@ void RaiseWarning() {
   digitalWrite(pinLEDWarning, HIGH);
 }
  void RaiseAlert() {
+  if (conditionCode == Alert) return;
   conditionCode = Alert;
   StopTimers();
   SendServerMessage();

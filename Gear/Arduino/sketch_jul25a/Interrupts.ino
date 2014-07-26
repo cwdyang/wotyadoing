@@ -1,6 +1,5 @@
 void PanicButtonPressed() {
     reasonCode = Panic;
-    conditionCode = Alert;
     RaiseAlert();
 }
 void CancelButtonPressed() {
