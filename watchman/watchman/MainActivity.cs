@@ -19,6 +19,8 @@ using Java.Util;
 using Android.Telephony;
 using Facebook;
 using WindowsAzure.Messaging;
+using Java.IO;
+using System.Text.RegularExpressions;
 
 
 namespace watchman
@@ -50,7 +52,8 @@ namespace watchman
 				//_btnState.SetBackgroundDrawable(Resources.GetDrawable(Resource.Drawable.alarm));
 
 				SetupBtTest();
-
+				if(!_btConnected)
+					Task.Run(()=> ReadBtStream ());
 				//SetButtonState("","");
 				//SetButtonState("A","G");
 				//SetButtonState("A","F");
@@ -73,6 +76,8 @@ namespace watchman
 				StartActivity (intent);     
 			};
 
+			//TODO try O and K 
+			Task.Run(()=> SetButtonState("O","K"));
 
 			//_btnDial111.Click += onDial111Click;
 		}
@@ -163,7 +168,7 @@ namespace watchman
 
 		private static int  REQUEST_ENABLE_BLUETOOTH      = 0x1111;
 		private static int  REQUEST_DISCOVERABLE_BLUETOOTH  = 0x222;
-		private const string _btDeviceName = "SFX"; //PROD"HC-06"; //TEST"SFX";
+		private const string _btDeviceName = "HC-06";//"SFX"; //PROD"HC-06"; //TEST"SFX";
 		private BluetoothSocket _btSocket;
 		private BluetoothServerSocket _btsSocket;
 		private BluetoothDevice _btDevice;
@@ -172,34 +177,8 @@ namespace watchman
 		private string _btMacAddress = "00001101-0000-1000-8000-00805f9b34fb";
 		private byte[] _btInputBuffer;
 
-		private void SetupBtProd()
-		{
-			try
-			{
-				if (_btAdapter != null &&
-				   !_btAdapter.IsEnabled) {
-					Intent enabler = new Intent(BluetoothAdapter.ActionRequestEnable);
-					StartActivityForResult(enabler, REQUEST_ENABLE_BLUETOOTH);
-				}
-
-				if (_btAdapter.IsDiscovering)
-					_btAdapter.CancelDiscovery ();
-
-				_btAdapter.StartDiscovery();
-
-				_btDevices = _btAdapter.BondedDevices.Where(x=>(new string[]{_btDeviceName}.ToList().Contains(x.Name))).ToList();
-
-				if (_btDevices.Count == 0) {
-					//TODO log something
-					return;
-				}
-
-				_btSocket = _btDevices.First ().CreateRfcommSocketToServiceRecord(UUID.FromString(_btMacAddress));
-
-			}
-			catch(Exception ex) {
-			}
-		}
+		private bool _btConnected;
+	
 
 
 		private void SetupBtTest()
@@ -224,7 +203,11 @@ namespace watchman
 					return;
 				}
 
-				_btSocket = _btDevices.First ().CreateRfcommSocketToServiceRecord(UUID.FromString(_btMacAddress));
+				//_btSocket = _btDevices.First ().CreateRfcommSocketToServiceRecord(UUID.FromString(_btMacAddress));
+
+				 var ids = _btDevices[0].GetUuids();
+
+				_btSocket = _btDevices.First ().CreateRfcommSocketToServiceRecord(ids[0].Uuid); //UUID.FromString());
 
 			}
 			catch(Exception ex) {
@@ -239,6 +222,20 @@ namespace watchman
 
 		}
 
+		private async Task sendSMS()
+		{
+			return;
+			try{
+			SmsManager.Default.SendTextMessage ("+6421505156", null,
+				"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+
+			SmsManager.Default.SendTextMessage ("+61410549248", null,
+				"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+			}
+			catch(Exception ex) {
+			}
+		}
+
 		/// <summary>
 		/// Inserts the even log.
 		/// </summary>
@@ -251,19 +248,42 @@ namespace watchman
 			{
 				var address = GetGeoAddresses ().First ();
 
+				var et = rawCode [1];
+				var er = rawCode [2];
+
+				string eventReason = "";
+				string eventType = "";
+
+				if (er == "G")
+					eventReason = "Gas";
+				if (er == "P")
+					eventReason = "Panic";
+				if (er == "F")
+					eventReason = "Fall";
+
+				if (et == "W")
+					eventType = "Warning";
+				if (et == "C")
+					eventType = "Cancel";
+				if (et == "A")
+					eventType = "Alarm";
+
 				event_log eventLog = new event_log {
-					device_id = rawCode [0], //123
-					event_type = rawCode [1],//A
-					event_reason = rawCode [2],//F
+					device_id = "1234", //123
+					event_type = eventType,//A
+					event_reason = eventReason,//F
 					longitude = _location.Longitude.ToString(),
 					latitude = _location.Latitude.ToString(),
 					altitude = address.SubThoroughfare + " " + address.Thoroughfare + ", " + address.Locality,
-					care_receiver = "",
-					comments = "",
-					operator_NAME = "",
-					severity = "",
-					status = ""
+					care_receiver = "Bob White",
+					comments = "incident reported",
+					operator_NAME = "Elena M",
+					severity = (et=="G")?"Critical":"High",
+					status = "Unattended"
 				};
+
+				if (er == "P"&& et!="C")
+					await sendSMS ();
 
 				await UnlockPhone ();
 
@@ -277,41 +297,82 @@ namespace watchman
 			}
 		}
 
+
+		private void ReadBtStream_COLD()
+		{
+			byte[] buffer = new byte[4096];  // buffer store for the stream
+			int bytes; // bytes returned from read()
+			_btSocket.Connect();
+
+			_btConnected=true;
+			// Keep listening to the InputStream until an exception occurs
+			while (true) {
+				try {
+
+					bytes = _btSocket.InputStream.Read (buffer, 0, buffer.Length);
+					byte[] readBuf = (byte[])buffer;
+					String strIncom =  System.Text.Encoding.Default.GetString (readBuf); 
+
+					System.Console.WriteLine(strIncom);
+
+					//string[] values = strIncom.Split("\r\n".ToCharArray());
+
+					//Console.WriteLine(values);
+				} catch (Exception ex) {
+				}
+			}
+		}
+
 		//MAQSOOD
 		//1234|O|K|SentriCare Client - Ver 0.1 BETA -> Hello World!;1234|A|F;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|C|P;1234|A|G;1234|C|G;
-		private async void ReadBtStream()
+		private void ReadBtStream()
 		{
 
-			if (_btSocket == null)
+			if (_btSocket== null)
 				return;
 			try
 			{
 				_btSocket.Connect();
 
-				SetButtonState("O","");
+				_btConnected=true;
 
-				_btInputBuffer = new byte[2048];
+
+				_btInputBuffer = new byte[1024];
 
 				int read;
 				CurrentPlatform.Init ();
 
-					for (; (read = _btSocket.InputStream.Read (_btInputBuffer, 0, _btInputBuffer.Length)) > -1;) {
+				//BufferedInputStream a = new BufferedInputStream( _btSocket.InputStream);
+
+				Regex r = new Regex(@"\w+\|\w\|\w");
+
+				for (; (read  =  _btSocket.InputStream.Read(_btInputBuffer, 0, _btInputBuffer.Length)) > -1;) {
+
+					//_btSocket.InputStream.Flush();
 
 					string values = System.Text.Encoding.Default.GetString (_btInputBuffer);
-					//Console.WriteLine (values);
+
+					/*
+					System.Console.WriteLine("---");
+					System.Console.WriteLine (values);
+					RunOnUiThread(()=>
+						_btnStatus.Text = values);
+						*/
 					try {
 						//http://social.msdn.microsoft.com/Forums/windowsazure/en-US/a47c9b11-81d0-4f19-8090-133250d3fb4b/problem-insertasync-xamarin-azure-mobile-service?forum=azuremobile
 						//Data coming in:
 						//deviceid,eventtype,reasoncode,reading/data;
 						//1|A|G|100;
-						foreach (string rawCode in values.Split(";".ToCharArray())) {
+						//foreach (string rawCode in values.Split(";".ToCharArray())) {
 
+						foreach(Match ex in r.Matches(values))
+						{
 							//6421505156
 							//SmsManager.Default.SendTextMessage ("+64210366688", null,
 							//	"Mrs Agnes Brown is in trouble. @ " + GetGeoAddresses().First().ToString(),null, null);
 
 							//insert this event log
-							await insertEvenLog(rawCode);
+							Task.Run(()=> insertEvenLog (ex.Value).Wait());
 							//_location;
 							/*
 							 * 
@@ -325,7 +386,8 @@ namespace watchman
 							await _azureClient.GetTable<Reading> ().InsertAsync (reading);
 							*/
 
-							GC.Collect (0);
+							//GC.Collect (0);
+						break;
 						}
 
 					} catch (Exception e) {
@@ -336,7 +398,10 @@ namespace watchman
 			}
 			 catch (Exception e) {
 				var e1 = e;
+				_btConnected = false;
 			}
+
+			_btConnected = false;
 		}
 		#endregion BT stuff
 
@@ -350,13 +415,15 @@ namespace watchman
 		#region FB stuff
 
 		private string _fbAccessToken;
-		private string _fbAPIAccessToken = "CAACEdEose0cBAHwUXwTtKZAzXjKvwoPTIDddICeeM9NIQy0bADMkQfZA9osZBfgsCzmncOYv1lpvc4zuhhSLqixMeGFa42VPFU8f3bQue7SH54XuIQIbE8woeQF3sxrR8JxDDKZCigawPy53qbShQ0i9ILkArdPIHsS84H4Ib2AQMWRhwa9yODjF2dtR0EyK1Tug6ZA0zelLTtONNPVre";
+
+		private string _fbAPIAccessToken = "CAACEdEose0cBAEj9PbzBEfXC7QcZAlzMSOQSYdQsPkgDGnz5WVMAXOjJfL9EBXWnfXu7LfH6Lk94itFDlCZAmKZC5IPc4RPSFYU2gSN1vmL7ZBAcFfyikVis4SdnKwoyqJkt5W4pTPNuhZAvMI9WZCryKlEyh5VzScmBtRn0Y1hVFxEUCpGd5CGTNWTSoDLlv030OrkTLQZCm9wkep0uL32";
 		/// <summary>
 		/// this is da shit
 		/// http://facebooksdk.net/docs/faq/
 		/// </summary>
 		private void SetupFb()
 		{
+			/*
 			var fb = new FacebookClient();
 			var result = fb.Get("oauth/access_token", new { 
 				client_id     = "1443593652568359",//"app_id", 
@@ -367,8 +434,9 @@ namespace watchman
 			_fbAccessToken = Convert.ToString(result);
 
 			_fbAccessToken = _fbAccessToken.Replace (@"{""access_token"":""",string.Empty).Replace (@"""}",string.Empty);//  @"{""access_token"":""1443593652568359|glxYP4d6TA9FpE0MUTqbMm7uW_Q""}";
+			*/
 
-			//PostToFb ("grandma wana post to fb" + DateTime.Now.ToString());
+			//PostToFb (Guid.NewGuid().ToString() + "Sentricare" + DateTime.Now.ToString());
 		}
 
 		/// <summary>
@@ -378,11 +446,11 @@ namespace watchman
 		/// </summary>
 		private void PostToFb(string message)
 		{
-			var fb = new FacebookClient("CAACEdEose0cBAFFM3OyG9lISm35ZAnyxDGU5C3ppPIDBxX1lGTdfGIKKHiBovi7OKpCDOuouxFZCj60U3FoY92uObyH4maq3VlFdOImwa7EG8WgQjvkHnNlTSolf75U0Y30PAIrdjwn219STXvYUI2iMfnT2TEXLh78QXIni9y9avV9tTZBOwns1lPTm9lyRRFFQU97lZBPqxZAqAILtZB");
+			var fb = new FacebookClient ();
 
-			fb.AppId = "1443593652568359";
-			fb.AppSecret = "c186fdf4592956d6ae73715b1410de75";
-			fb.AccessToken = _fbAPIAccessToken;//_fbAccessToken;
+			fb.AppId = "1392784214294156";
+			fb.AppSecret = "1f87756e9fe953ceab2c3da8f959fa9c";
+			fb.AccessToken = "CAACEdEose0cBAOP2OBgGcb78HXtgVrbkn9Jy7Y3K9nvNn7iWx51jsBeY90yZBz1ia0Rf3IoEg1\nKvKJ0kY9Q16jdFxRnxrwAcD1ofO2CN398T8LdHjeo1jd3uCRWTopY5zs1fRPbxOw1uB0nuDBbSS\nBDBFzfoZA1J78OWvgIcuSGIvjJkesON6qZAIrC8wwZD";//_fbAccessToken;
 
 			try
 			{
@@ -509,6 +577,8 @@ namespace watchman
 			};
 
 			setup ();
+
+			Task.Run(()=> ReadBtStream ());
 		}
 
 		/// <summary>
@@ -516,7 +586,7 @@ namespace watchman
 		/// </summary>
 		private void setup()
 		{
-			UnlockPhone ();
+			Task.Run(()=> UnlockPhone ().Wait());
 
 			SetupUI ();
 			SetupVibrator ();
@@ -527,9 +597,6 @@ namespace watchman
 			SetupFb ();
 
 			//Task.Run(()=> insertEvenLog ("1234|A|F").Wait());
-
-			Task.Run(()=> ReadBtStream ());
-
 
 
 		}
@@ -579,6 +646,9 @@ namespace watchman
 			bool rG = Resources.GetString (Resource.String.reason_gas_code)==(reason);
 			bool rF = Resources.GetString (Resource.String.reason_fall_code)==(reason);
 			bool rP = Resources.GetString (Resource.String.reason_panic_code)==(reason);
+
+			if (rF) {
+			}
 
 			buttonDesc += (rG)?" " + Resources.GetString (Resource.String.reason_gas_desc):string.Empty;
 			buttonDesc += (rF)?" " + Resources.GetString (Resource.String.reason_fall_desc):string.Empty;
