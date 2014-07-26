@@ -22,9 +22,12 @@ int z;
   return false;
 }
 byte SampleTiltSensor() {
+  if (TEST_BOARD) return digitalRead(pinTilt);
   return !digitalRead(pinTilt);
 }
 byte SampleGasSensor() {
-  return !digitalRead(pinGasDetect);
+    if (TEST_BOARD) return digitalRead(pinGasDetect);
+    return !digitalRead(pinGasDetect);
 }
+
 
