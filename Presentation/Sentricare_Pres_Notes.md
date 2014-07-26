@@ -77,9 +77,14 @@ It only takes one forgetful moment to create a dangerous situation. Sentricare's
 1. Assistant comes up with butane - sprays in front of model.
 2. Alert is sounded
 
-**Narrator - Part 5: Alert Received**
+**Narrator - Part 5: Operator**
 
+So we've talked about the user aspect of Sentricare, but to take it beyond the everyday, Sentricare's cloud-based alert and action system allows subscribers and operators to monitor and manage incidents.
 
+*Demo - manage alerts*
+
+1. Assistant 1 - "I am an operator, looking monitoring activity"
+2. Assistant 2 - "I've am out of town. I'll just check to how Nanna is going." 
 
 **show:**
 * <strike>device and app</strike>
@@ -96,6 +101,12 @@ Sentricare answers many important questions: Who is having falls? Where are they
 
 The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. 
 
+<mark>Data Visualisation</mark>
+
+<mark>Medical Records</mark>
+
+<mark>Whaty other data sets can I use to make more sense of the data?</mark>
+
 
 ##Slide 10 - Always
 Sentricare is always there for you: 24 hours a day, seven days a week. Giving families and loved ones peace of mind. and above all.
@@ -105,7 +116,7 @@ Our older community members can continue to be independent and safe.
 
 <mark>Questions - use safe as finishing slide</mark>
 
-##Slide 12 - End
+##Slide 12 - End Sentricare
 
 
 
