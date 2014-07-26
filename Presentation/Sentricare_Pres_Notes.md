@@ -42,7 +42,9 @@ Sentricare's 24x7 service provides <mark>[Slide 4]</mark> peace of mind for seni
 
 <mark>[Slide 13]</mark> Sentricare is the smart choice. Sentricare is the Safe choice.
 
-<mark>[Slide 14]</mark> Thankyou. Now we will demonstrate the Sentricare solution and I will hand over to Sean. 
+<mark>[Slide 14]</mark> Oh, one more thing... In the spirit of collaboration, I am pleased to announce <mark>[Slide 15]</mark> the strategic partnership between Sentricare and Situation Awareness to take Sentricare Client technology into enterprise and industry applications. Special thanks go to Ken Honeyman and the Situation Awareness team for this partnership.
+
+<mark>[Slide 16]</mark> Thankyou. Now we will demonstrate the Sentricare solution and I will hand over to Sean. 
 
 ##Demo
 <mark>Demo has **four** minutes</mark>
