@@ -10,10 +10,51 @@
 
 **Questions**: 2 Minutes
 
+1. The Concept
+2. Commercial Viability
+3. Deisgn and Execution
+4. Completeness
+5. Data Visualisation
+6. Use of Technology
+
+The Concept
+
+Ladies and Gentlemen, today we are very excited to present Sentricare. When you can't be there; there's Sentricare. Did you know that falls are the leading cause of injuries in people over 65? Our loves ones over 75 are 4 times more likely to have a fall related injury than at age 65. Falls are the single largest cause of death in New Zealand for people over 65. 1 in 3 seniors over 65 experiences a fall each year.
+
+Women are two times more likely to suffer a fracture than men. Timely Medical Attention Saves lives. 50% of seniors who fall need assistance from someone else. 90% of all seniors who receive assistance within the first hour can continue to live independently but 30% of all seniors are on the floor for more than an hour. with 1/3 will experience a fall at least once a year.
+
+This is a massive cost on health care systems across the world. Western populations are living longer. Currently in Australia there are 5 working adults to every pensioner. By 2030, it is projected to be 1 in 3. In New Zealand, 21% of the population will be over 65 by 2031. Our older loves ones deserve to live in a safe, secure and dignified way. The investment in Sentricare is a mere fraction of the cost of falls to our society.
+
+Sentricare's 24x7 service provides peace of mind for seniors and their families. Unlike other fall detection systems that require expensive sensors installed in your house: Sentricare goes where you go. The system notifies the response centre, but also loved ones via SMS and Social Media connections. 
+
+This however is not where Sentricare ends: Our cloud service provides insights that allow us to take preventative action to make homes safer: Our analytics indicate when a safety assessment is necessary: Not just in the home, but in public spaces. 
+
+Sentricare is Ever Present. Safe. 
+
+
 ##Slide 0
-Ladies and Gentlemen, today we are very excited to 
 
 <mark>Reveal</mark>
+
+2-3 slides and example - too many slides
+allow 7 mins
+messaging - keep judging criteria handy
+market - why and where
+1 or 2 things
+
+more applications yhrn just talk about keys
+
+product or business - Startup
+key messages
+
+COST OF PRODUCT
+COST OF SERVICE
+COMMERVIAL VIABILITY
+
+price of market / size of market / stats cost of healthcare
+L2 potential to share stats
+
+
 
 ##Slide 1 - Sentricare
  
