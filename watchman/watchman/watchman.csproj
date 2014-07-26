@@ -81,6 +81,7 @@
     <Compile Include="GoogleCloudMessaging\GcmServiceConnection.cs" />
     <Compile Include="GoogleCloudMessaging\GcmServiceBroadcastReceiver.cs" />
     <Compile Include="Domain\GcmRegistrations.cs" />
+    <Compile Include="Domain\EventLog.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\AboutResources.txt" />

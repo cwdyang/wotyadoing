@@ -74,9 +74,14 @@ namespace watchman
 		/// </summary>
 		private void SetupGcm()
 		{
+
+			//Temp
+			insertEvenLog ("1234|A|F");
 			//http://www.dotnetthoughts.net/xamarin-android-push-notifications-using-google-cloud-messaging-gcm-and-asp-net/
 			GcmClient.CheckDevice (this);
 			GcmClient.CheckManifest (this);
+
+
 
 			//The SENDER_ID is your Google API Console App Project Number
 			//https://console.developers.google.com/project/571871212429
@@ -167,6 +172,41 @@ namespace watchman
 			}
 		}
 
+		private void buttonStateSet()
+		{
+			_btnState.Text = "";
+			//_btnState.Background = ?
+
+
+		}
+
+		/// <summary>
+		/// Inserts the even log.
+		/// </summary>
+		/// <param name="rawData">Raw data.</param>
+		private async void insertEvenLog(string rawData)
+		{
+			//1234|O|K|SentriCare Client - Ver 0.1 BETA -> Hello World!;1234|A|F;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|C|P;1234|A|G;1234|C|G;
+			string[] rawCode = rawData.Split ('|').ToArray ();
+			if(rawCode.Length == 3)//make sure it's in this format 1234|A|F
+			{
+				EventLog eventLog = new EventLog {
+					device_id = rawCode [0], //123
+					event_type = rawCode [1],//A
+					event_data = rawCode [2],//F
+					created_at = DateTime.Now,
+					longitute = _location.Longitude.ToString(),
+					latitude = _location.Latitude.ToString(),
+					altitude = _location.Altitude.ToString(),
+				};
+				await _azureClient.GetTable<EventLog> ().InsertAsync (eventLog);
+			}
+			else
+			{
+				//log it & discard it, may be corrupted
+			}
+		}
+
 		//MAQSOOD
 		//1234|O|K|SentriCare Client - Ver 0.1 BETA -> Hello World!;1234|A|F;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|C|P;1234|A|G;1234|C|G;
 		private async void ReadBtStream()
@@ -192,12 +232,15 @@ namespace watchman
 						//Data coming in:
 						//deviceid,eventtype,reasoncode,reading/data;
 						//1|A|G|100;
-						foreach (string s in values.Split(";".ToCharArray())) {
+						foreach (string rawCode in values.Split(";".ToCharArray())) {
 
 							//6421505156
 							SmsManager.Default.SendTextMessage ("+64210366688", null,
 								"Mrs Agnes Brown is in trouble. @ " + GetGeoAddresses().First().ToString(),null, null);
 
+							//insert this event log
+							insertEvenLog(rawCode);
+							//_location;
 							/*
 							 * 
 							 * example insert
