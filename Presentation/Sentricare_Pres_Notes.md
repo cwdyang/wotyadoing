@@ -22,7 +22,7 @@
 <mark>[Slide 0 - Prelim]</mark>
 
 <mark>[Slide 1]</mark>: 
-Thankyou. It is no surprise that western populations are getting older. In New Zealand 585,000 people are over the age of 65. This figure is still growing. By 2031 21% of all New Zealanders will be over 65. The leading cause of Death for those over 65 are fall-related incidents. 30% of sensiors will have at least one fall each year. That's at least 193,000 falls each year! Falls are a massive cost on health care systems across the world. 
+Thankyou. It is no surprise that western populations are getting older. In New Zealand 585,000 people are over the age of 65. This figure is still growing. By 2031 21% of all New Zealanders will be over 65. The leading cause of Death for those over 65 are fall-related incidents. 30% of seniors will have at least one fall each year. That's at least 193,000 falls each year! Falls are a massive cost on health care systems across the world. 
 
 <mark>[Slide 2]</mark> Of those falls, 50% of all seniors need someone else's help. By responding within one hour, 90% of all seniors that have a fall will recover and continue to live independently. However 30% of all seniors that fall are on the floor for over an hour.
 
@@ -36,9 +36,9 @@ Sentricare's 24x7 service provides <mark>[Slide 4]</mark> peace of mind for seni
 
 <mark>[Slide 7]</mark> Incidents not only include fall detection, but other important safety features such as an emergency button and gas leak detection. Rapid response means emergency services can be with you sooner. <mark>[Slide 8]</mark> Wherever you go, Sentricare is with you. 
 
-<mark>[Slide 9]</mark> The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. <mark>[Slide 10]</mark> Ultimately, Sentricare is about prevention. By identifying hazards in the home and public spaces through mapping and data analysis, risks can be mitigated. 
+<mark>[Slide 9]</mark> The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, emergency services and clinicians have a powerful tool to improve quality of life for our older citizens. <mark>[Slide 10]</mark> Ultimately, Sentricare is about prevention. By identifying hazards in the home and public spaces through mapping and data analysis, risks can be mitigated. 
 
-<mark>[Slide 11]</mark>Prevention is better and cheaper than the cure. Currently St John's Lifelink product is available for $45 per month with a setup cost of $350 and can only be used within 300m of the house. <mark>[Slide 12]</mark> Sentricare goes wherever you do: At $199 per device, and $44 per month; Sentricare is the more cost-effecitve solution.
+<mark>[Slide 11]</mark>Prevention is better and cheaper than the cure. Currently St John's Lifelink product is available for $45 per month with a setup cost of $350 and can only be used within 300m of the house. <mark>[Slide 12]</mark> Sentricare goes wherever you do: At $199 per device, and $44 per month; Sentricare is the more cost-effective solution.
 
 <mark>[Slide 13]</mark> Sentricare is the smart choice. Sentricare is the Safe choice.
 
@@ -57,7 +57,7 @@ Oh! <mark>[Slide 14]</mark> One more thing... In the spirit of collaboration, I 
 
 **Narrator - Part 1: Device and App**
 
-Sentricare is there when you need it most. Here is the sentricare belt, or as we refer to it: the halo of safety. This one small convenient device is worn by the older person. This device works in tandem with the Sentricare mobile app. Unlike other fall prevention devices, Sentricare's big advantage is that it is not bound to the home: it goes wherever you go, providing a safety net wherever and whenever you need it. 
+Sentricare is there when you need it most. Here is the Sentricare belt, or as we refer to it: the halo of safety. This one small convenient device is worn by the older person. This device works in tandem with the Sentricare mobile app. Unlike other fall prevention devices, Sentricare's big advantage is that it is not bound to the home: it goes wherever you go, providing a safety net wherever and whenever you need it. 
 
 *Demo - device and app*
 
@@ -66,7 +66,7 @@ Sentricare is there when you need it most. Here is the sentricare belt, or as we
 
 **Narrator - Part 2: Falling Down**
 
-We can't be everywhere all the time which is why Sentricare is there when you need it most. A small fall can lead to big problems, and a quick effective response is necessary. A fifteen second warning is sounded allowing the user to cancel if it was a small stumble before triggering an alert. When a fall moves from warning to alert, family members are notified, and sentricare operators receive a notification.
+We can't be everywhere all the time which is why Sentricare is there when you need it most. A small fall can lead to big problems, and a quick effective response is necessary. A fifteen second warning is sounded allowing the user to cancel if it was a small stumble before triggering an alert. When a fall moves from warning to alert, family members are notified, and Sentricare operators receive a notification.
 
 *Demo - falling down*
 
@@ -77,7 +77,7 @@ We can't be everywhere all the time which is why Sentricare is there when you ne
 
 **Narrator - Part 3: Sentricare Screen**
 
-Sentricare Operators are able to monitor and see alerts from the cloud portal. The operator see's that Nanna is in trouble and can alert emergency services giving precise location information.
+Sentricare Operators are able to monitor and see alerts from the cloud portal. The operator sees that Nanna is in trouble and can alert emergency services giving precise location information.
 
 *Demo - Screens* 
 
@@ -87,7 +87,7 @@ Sentricare Operators are able to monitor and see alerts from the cloud portal. T
 4. *[optional]* Lego helicopter
 
 **Narrator - Part 4: Insight**
-As you can see, Sentricare allows us to keep track of the number of incidents a user has had. By using other services such as maps and other data, we can determine if a senior person needs to have a safety inspection on their house, or via mapping, if there is a tripping hazard in a public space and alert council.
+As you can see, Sentricare allows us to keep track of the number of incidents a user has had. By using other services such as maps and other data, we can determine if a senior person needs to have a safety inspection on their house; or via mapping if there is a tripping hazard in a public space and alert council.
 
 1. Operator show insight screen
 
