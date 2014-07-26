@@ -10,35 +10,41 @@
 
 **Questions**: 2 Minutes
 
-##Slide 0
-Ladies and Gentlemen, today we are very excited to 
+1. The Concept
+2. Commercial Viability
+3. Design and Execution
+4. Completeness
+5. Data Visualisation
+6. Use of Technology
 
-<mark>Reveal</mark>
+===
 
-##Slide 1 - Sentricare
- 
+<mark>[Slide 0 - Prelim]</mark>
 
-##Slide 2 - Committed
+<mark>[Slide 1]</mark>: 
+Thankyou. It is no surprise that western populations are getting older. In New Zealand 585,000 people are over the age of 65. This figure is still growing. By 2031 21% of all New Zealanders will be over 65. The leading cause of Death for those over 65 are fall-related incidents. 30% of sensiors will have at least one fall each year. That's at least 193,000 falls each year! Falls are a massive cost on health care systems across the world. 
 
+<mark>[Slide 2]</mark> Of those falls, 50% of all seniors need someone else's help. By responding within one hour, 90% of all seniors that have a fall will recover and continue to live independently. However 30% of all seniors that fall are on the floor for over an hour.
 
-##Slide 3 - Secure
+Timely Medical Attention Saves Lives.
 
+So what is the solution? 
 
-##Slide 4 - Support
+Ladies and Gentlemen, today I am pleased to announce the solution: <mark>[Slide 3]</mark> Sentricare! When you can't be there; there's Sentricare. 
 
+Sentricare's 24x7 service provides <mark>[Slide 4]</mark> peace of mind for seniors and their families. Unlike other fall detection systems that require expensive sensors installed in your house: <mark>[Slide 5]</mark> Sentricare goes where you go. The system notifies the response centre, but also <mark>[Slide 6]</mark> loved ones via SMS and Social Media connections. 
 
-##Slide 5 - Prevent
+<mark>[Slide 7]</mark> Incidents not only include fall detection, but other important safety features such as an emergency button and gas leak detection. <mark>[Slide 8]</mark> Rapid response means emergency services can be with you sooner. <mark>[Slide 9]</mark> Wherever you go, Sentricare is with you. 
 
+<mark>[Slide 10]</mark> The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. <mark>[Slide 11]</mark> Ultimately, Sentricare is about prevention. By identifying hazards in the home and public spaces through mapping and data analysis, risks can be mitigated. 
 
-##Slide 6 - Respond
+<mark>[Slide 11]</mark>Prevention is better and cheaper than the cure. Currently St John's Lifelink product is available for $45 per month with a setup cost of $350 and can only be used within 300m of the house. <mark>[Slide 12]</mark> Sentricare goes wherever you do: At $199 per device, and $44 per month; Sentricare is the more cost-effecitve solution.
 
+<mark>[Slide 13]</mark> Sentricare is the smart choice. Sentricare is the Safe choice.
 
-##Slide 7 - Alert
+<mark>[Slide 14]</mark> Thankyou. Now we will demonstrate the Sentricare solution and I will hand over to Sean. 
 
-
-##Slide 8 - With You
-
-###Demo
+##Demo
 <mark>Demo has **four** minutes</mark>
 
 **Narrator - Part 1: Device and App**
@@ -96,7 +102,6 @@ So we've talked about the user aspect of Sentricare, but to take it beyond the e
 * insights
 * Users v. Operators
 
-##Slide 9 - Insight
 Sentricare answers many important questions: Who is having falls? Where are they located? What is the frequency of alerts and warnings?
 
 The most important factor taking Sentricare beyond the everyday is the innovative use of cloud technology to provide insight. By answering these questions, carers, senior services and clinicians have a powerful tool to improve quality of life for our older citizens. 
@@ -106,18 +111,6 @@ The most important factor taking Sentricare beyond the everyday is the innovativ
 <mark>Medical Records</mark>
 
 <mark>Whaty other data sets can I use to make more sense of the data?</mark>
-
-
-##Slide 10 - Always
-Sentricare is always there for you: 24 hours a day, seven days a week. Giving families and loved ones peace of mind. and above all.
-
-##Slide 11 - Safe
-Our older community members can continue to be independent and safe. 
-
-<mark>Questions - use safe as finishing slide</mark>
-
-##Slide 12 - End Sentricare
-
 
 
 
