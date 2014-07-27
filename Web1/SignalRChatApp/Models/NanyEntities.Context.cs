@@ -22,7 +22,7 @@ namespace SignalRChatApp.Models
     
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
-            throw new UnintentionalCodeFirstException();
+            
         }
     
         public DbSet<contact> contacts { get; set; }

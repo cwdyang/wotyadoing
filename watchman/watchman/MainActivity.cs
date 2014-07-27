@@ -168,7 +168,7 @@ namespace watchman
 
 		private static int  REQUEST_ENABLE_BLUETOOTH      = 0x1111;
 		private static int  REQUEST_DISCOVERABLE_BLUETOOTH  = 0x222;
-		private const string _btDeviceName = "HC-06";//"SFX"; //PROD"HC-06"; //TEST"SFX";
+		private const string _btDeviceName = "SFX";//"SFX"; //PROD"HC-06"; //TEST"SFX";
 		private BluetoothSocket _btSocket;
 		private BluetoothServerSocket _btsSocket;
 		private BluetoothDevice _btDevice;
@@ -224,13 +224,17 @@ namespace watchman
 
 		private async Task sendSMS()
 		{
-			return;
 			try{
-			SmsManager.Default.SendTextMessage ("+6421505156", null,
-				"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
-
-			SmsManager.Default.SendTextMessage ("+61410549248", null,
-				"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+				SmsManager.Default.SendTextMessage ("+64210366688", null,
+					"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+				/*
+				SmsManager.Default.SendTextMessage ("+6421505156", null,
+					"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+				SmsManager.Default.SendTextMessage ("+61410549248", null,
+					"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+				SmsManager.Default.SendTextMessage ("+61211700097", null,
+					"Mrs Nana has reported an incident:" + _btnState.Text,null, null);
+				*/
 			}
 			catch(Exception ex) {
 			}
@@ -242,6 +246,8 @@ namespace watchman
 		/// <param name="rawData">Raw data.</param>
 		private async Task insertEvenLog(string rawData)
 		{
+			try
+			{
 			//1234|O|K|SentriCare Client - Ver 0.1 BETA -> Hello World!;1234|A|F;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|A|P;1234|C|P;1234|A|G;1234|C|G;
 			string[] rawCode = rawData.Split ('|').ToArray ();
 			if(rawCode.Length == 3)//make sure it's in this format 1234|A|F
@@ -254,19 +260,11 @@ namespace watchman
 				string eventReason = "";
 				string eventType = "";
 
-				if (er == "G")
-					eventReason = "Gas";
-				if (er == "P")
-					eventReason = "Panic";
-				if (er == "F")
-					eventReason = "Fall";
-
-				if (et == "W")
-					eventType = "Warning";
-				if (et == "C")
-					eventType = "Cancel";
-				if (et == "A")
-					eventType = "Alarm";
+					RunOnUiThread(()=>
+						{
+				eventReason = _codeDescPairs.Where (x => x.Key == er).Select (y => y.Value).FirstOrDefault();
+				eventType = _codeDescPairs.Where (x => x.Key == et).Select (y => y.Value).FirstOrDefault();
+						});
 
 				event_log eventLog = new event_log {
 					device_id = "1234", //123
@@ -282,8 +280,10 @@ namespace watchman
 					status = "Unattended"
 				};
 
-				if (er == "P"&& et!="C")
+				if (new string[]{Resources.GetString(Resource.String.event_type_alarm_code),Resources.GetString(Resource.String.event_type_warn_code)}.Contains(et) ) {
 					await sendSMS ();
+					//PostToFb ("Sentricare: incident reported [ID=1234] @" + DateTime.Now.ToString ());
+				}
 
 				await UnlockPhone ();
 
@@ -295,7 +295,11 @@ namespace watchman
 			{
 				//log it & discard it, may be corrupted
 			}
+			}
+			catch(Exception ex) {
+			}
 		}
+
 
 
 		private void ReadBtStream_COLD()
@@ -436,7 +440,7 @@ namespace watchman
 			_fbAccessToken = _fbAccessToken.Replace (@"{""access_token"":""",string.Empty).Replace (@"""}",string.Empty);//  @"{""access_token"":""1443593652568359|glxYP4d6TA9FpE0MUTqbMm7uW_Q""}";
 			*/
 
-			//PostToFb (Guid.NewGuid().ToString() + "Sentricare" + DateTime.Now.ToString());
+			//
 		}
 
 		/// <summary>
@@ -581,11 +585,16 @@ namespace watchman
 			Task.Run(()=> ReadBtStream ());
 		}
 
+
+		Dictionary<string,string> _codeDescPairs = new Dictionary<string, string> ();
+
 		/// <summary>
 		/// setup all the goodies
 		/// </summary>
 		private void setup()
 		{
+			SetupStrings ();
+
 			Task.Run(()=> UnlockPhone ().Wait());
 
 			SetupUI ();
@@ -597,6 +606,22 @@ namespace watchman
 			SetupFb ();
 
 			//Task.Run(()=> insertEvenLog ("1234|A|F").Wait());
+
+
+		}
+
+		private void SetupStrings()
+		{
+
+
+			_codeDescPairs.Add (Resources.GetString (Resource.String.reason_gas_code), Resources.GetString (Resource.String.reason_gas_desc));
+			_codeDescPairs.Add (Resources.GetString (Resource.String.reason_fall_code), Resources.GetString (Resource.String.reason_fall_desc));
+			_codeDescPairs.Add (Resources.GetString (Resource.String.reason_panic_code), Resources.GetString (Resource.String.reason_panic_desc));
+
+			_codeDescPairs.Add (Resources.GetString (Resource.String.event_type_cancel_code), Resources.GetString (Resource.String.event_type_cancel_desc));
+			_codeDescPairs.Add (Resources.GetString (Resource.String.event_type_alarm_code), Resources.GetString (Resource.String.event_type_alarm_desc));
+			_codeDescPairs.Add (Resources.GetString (Resource.String.event_type_warn_code), Resources.GetString (Resource.String.event_type_warning_desc));
+			_codeDescPairs.Add (Resources.GetString (Resource.String.event_type_ok_code), Resources.GetString (Resource.String.event_type_ok_desc));
 
 
 		}
@@ -665,7 +690,7 @@ namespace watchman
 				if (etA || etW) {
 					_lastAlert = DateTime.Now;
 					_btnStatus.Text = "Emergency personnel on their way to you, please stay where you are.";
-				} else if (etC || _lastAlert.HasValue) {
+				} else if (etC && _lastAlert.HasValue) {
 					_btnStatus.Text = "Last alert: " + _lastAlert.Value.ToString ("ddd dd/mm/yyyy hh:mm tt");
 				}
 

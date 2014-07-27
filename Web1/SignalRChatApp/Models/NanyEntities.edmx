@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
   <!-- EF Runtime content -->
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-    <Schema Namespace="NannyModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="NannyModels.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="NannyModelsStoreContainer">
-          <EntitySet Name="contact" EntityType="NannyModels.Store.contact" store:Type="Tables" Schema="cwdyangMobile" />
-          <EntitySet Name="event_history" EntityType="NannyModels.Store.event_history" store:Type="Tables" Schema="cwdyangMobile" />
-          <EntitySet Name="event_log" EntityType="NannyModels.Store.event_log" store:Type="Tables" Schema="cwdyangMobile" />
+          <EntitySet Name="contact" EntityType="NannyModels.Store.contact" store:Type="Tables" Schema="cwdyangMobile" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="event_history" EntityType="NannyModels.Store.event_history" store:Type="Tables" Schema="cwdyangMobile" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="event_log" EntityType="NannyModels.Store.event_log" store:Type="Tables" Schema="cwdyangMobile" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
         </EntityContainer>
         <EntityType Name="contact">
           <Key>
@@ -65,7 +65,7 @@
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
-      <Schema Namespace="NannyModels" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+      <Schema Namespace="NannyModels" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns="http://schemas.microsoft.com/ado/2008/09/edm" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation">
         <EntityContainer Name="NannyStateEntities" p1:LazyLoadingEnabled="true">
           <EntitySet Name="event_history" EntityType="NannyModels.event_history" />
           <EntitySet Name="contacts" EntityType="NannyModels.contact" />
@@ -78,7 +78,7 @@
           <Property Type="String" Name="id" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="DateTimeOffset" Name="C__createdAt" Nullable="false" Precision="3" />
           <Property Type="DateTimeOffset" Name="C__updatedAt" Precision="3" />
-          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="status" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="severity" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="comments" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -93,7 +93,7 @@
           <Property Type="String" Name="id" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="DateTimeOffset" Name="C__createdAt" Nullable="false" Precision="3" />
           <Property Type="DateTimeOffset" Name="C__updatedAt" Precision="3" />
-          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="care_receiver" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="name" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="address" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -110,7 +110,7 @@
           <Property Type="String" Name="id" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
           <Property Type="DateTimeOffset" Name="C__createdAt" Nullable="false" Precision="3" />
           <Property Type="DateTimeOffset" Name="C__updatedAt" Precision="3" />
-          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" />
+          <Property Type="Binary" Name="C__version" Nullable="false" MaxLength="8" FixedLength="true" annotation:StoreGeneratedPattern="Computed" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" />
           <Property Type="String" Name="care_receiver" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="status" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Type="String" Name="event_type" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -127,7 +127,7 @@
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
-      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
         <EntityContainerMapping StorageEntityContainer="NannyModelsStoreContainer" CdmEntityContainer="NannyStateEntities">
           <EntitySetMapping Name="event_history">
             <EntityTypeMapping TypeName="NannyModels.event_history">
@@ -189,7 +189,7 @@
     </edmx:Mappings>
   </edmx:Runtime>
   <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
-  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
     <Connection>
       <DesignerInfoPropertySet>
         <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
@@ -204,6 +204,6 @@
       </DesignerInfoPropertySet>
     </Options>
     <!-- Diagram content (shape and connector positions) -->
-    <Diagrams></Diagrams>
+    <Diagrams />
   </Designer>
 </edmx:Edmx>
