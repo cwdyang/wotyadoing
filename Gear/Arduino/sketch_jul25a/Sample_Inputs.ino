@@ -1,5 +1,5 @@
 byte SampleSensors() {
-  delay(1);
+  delay(1); // Required amount TBD
   if (SampleAccelerometer()) {
    reasonCode = Fall;
    return true;
@@ -10,7 +10,7 @@ byte SampleSensors() {
   }  
   if (SampleGasSensor()) {
   reasonCode = Gas;
-  return true;
+  //return true;
   }  
   return false;
 }
@@ -25,7 +25,7 @@ String message;
 /* 9:45AM Sunday Morning. 6 Hours sleep since Friday 7am and I have to write 
 this last minute crap code becuase we had to diagnose BlutTooth problems for 5 hours last night!
 No time for my Opus Magnum...the FALL ALGO.
-Oh God forgive me for my transcendance...
+Oh God forgive me for my transcendance into darkness...
 */
   x = analogRead(pinAccelX);
   y = analogRead(pinAccelY);
@@ -48,7 +48,7 @@ Oh God forgive me for my transcendance...
   return false;
 }
 byte SampleTiltSensor() {
-  if (TEST_BOARD) return digitalRead(pinTilt);
+  //if (TEST_BOARD) return digitalRead(pinTilt);
   //return !digitalRead(pinTilt);
 }
 byte SampleGasSensor() {
