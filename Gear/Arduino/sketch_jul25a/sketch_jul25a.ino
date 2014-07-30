@@ -1,7 +1,7 @@
 #include "Timer.h"
 #include "SoftwareSerial.h"
 #define TEST_BOARD false
-// Acceleromter
+// Accelerometer
 #define pinAccelX A0
 #define pinAccelY A1
 #define pinAccelZ A2
@@ -33,9 +33,9 @@
 #define seeedBTBaudRate 38400
 #define seeedBTInitDelay 2000
 // Messages
-const String deviceID = "1234";
 const String deviceName = "Sentinal-";
-const String softwareVersion = "0.3.0";
+const String deviceID = "1234";
+const String softwareVersion = ". - Software Version 0.3.0";
 const String messageON = "O";
 const String messageOK = "K";
 const String messageNormal = "N";
@@ -54,10 +54,9 @@ volatile condition conditionCode;
 typedef enum {Gas, Fall, Panic} reason;
 volatile reason reasonCode;
 // Misc
-SoftwareSerial serialBT(pinBlueToothRX, pinBlueToothTX); // RX, TX
+SoftwareSerial serialBT(pinBlueToothRX, pinBlueToothTX);
 Timer timerCountdown;
 Timer timerPulse;
-
 int idTimerCountdown;
 int idTimerPulse;
 //------------------------------------------------------------------
@@ -72,7 +71,7 @@ void setup() {
     delay(2000);
   }
   SendCustomMessage(messageDelimiter + messageON + messageDelimiter +
-  messageOK + messageDelimiter + deviceName + deviceID + "- Software Version " + softwareVersion);
+  messageOK + messageDelimiter + deviceName + deviceID + softwareVersion);
   pinMode(pinAccelSG,OUTPUT);
   //pinMode(pinTilt,INPUT);
   //pinMode(pinGasDetect,INPUT);

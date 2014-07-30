@@ -52,8 +52,8 @@ byte SampleTiltSensor() {
   //return !digitalRead(pinTilt);
 }
 byte SampleGasSensor() {
-    if (TEST_BOARD) return digitalRead(pinGasDetect);
-    return !digitalRead(pinGasDetect);
+  //if (TEST_BOARD) return digitalRead(pinGasDetect);
+  //return !digitalRead(pinGasDetect);
 }
 
 

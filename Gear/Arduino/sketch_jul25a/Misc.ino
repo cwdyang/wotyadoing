@@ -20,9 +20,9 @@ String ConstructCondition(byte theCondition) {
        break;
      case Alert:
        return messageAlert;
+       break;
      case Canceled:
        return messageCanceled;
-
     }
 }
 
