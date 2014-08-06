@@ -5,6 +5,7 @@ void ResetState() {
   analogWrite(pinLEDWarning, LOW);
   analogWrite(pinLEDOn, pwmLEDBrightness);
 }
+//---------------------------------------------------------------------------------------------------------------------------------------
 void SetWarningState() {
   conditionCode = Warning;
   digitalWrite(pinBuzzer, LOW);
@@ -12,6 +13,7 @@ void SetWarningState() {
   analogWrite(pinLEDOn, LOW);
   analogWrite(pinLEDWarning, pwmLEDBrightness);
 }
+//---------------------------------------------------------------------------------------------------------------------------------------
 void SetAlertState() {
   conditionCode = Alert;
   digitalWrite(pinBuzzer, HIGH);

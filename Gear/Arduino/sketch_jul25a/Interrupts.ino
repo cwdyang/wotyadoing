@@ -2,6 +2,7 @@ void PanicButtonPressed() {
     reasonCode = Panic;
     RaiseAlert();
 }
+//---------------------------------------------------------------------------------------------------------------------------------------
 void CancelButtonPressed() {
   if (conditionCode == Warning) {
     conditionCode = Canceled;

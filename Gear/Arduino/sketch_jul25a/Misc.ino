@@ -10,6 +10,7 @@ String ConstructReason(byte theReason) {
        return messageReasonPanic;
     }
 }
+//---------------------------------------------------------------------------------------------------------------------------------------
 String ConstructCondition(byte theCondition) {
    switch (theCondition) {
      case Normal:
